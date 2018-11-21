@@ -1,0 +1,11 @@
+.Group{
+    /* Need to be the same to keep text centered in <li> */
+    height:50px;
+    line-height:50px;
+    /* ^^^^^^^^^^ */
+
+    list-style-type: none;
+    background-color: coral;
+    text-align: center;
+
+}

@@ -1,0 +1,19 @@
+.TopBar{
+    background-color:red;
+    height:60px;
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 200;
+}
+.Logo, .Logo img{
+    height:100%;
+    width:auto;
+}
+.Menu{
+    margin-left:15px;
+}
+.Profile{
+    margin-right:15px;
+}

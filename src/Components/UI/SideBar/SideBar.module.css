@@ -1,4 +1,6 @@
 .SideBar{
     background-color: cadetblue;
-    width:20%;
+    width:20vw;
+    position: relative;
+    overflow: scroll;
 }

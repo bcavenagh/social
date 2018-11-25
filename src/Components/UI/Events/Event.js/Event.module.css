@@ -1,4 +1,6 @@
 .Event{
     background-color: goldenrod;
-    
+    height:25%;
+    width:30%;
+    display:inline-block;
 }

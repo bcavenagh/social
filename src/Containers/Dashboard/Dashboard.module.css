@@ -1,4 +1,7 @@
 .Dashboard{
     background-color: pink;
-    width:80%;
+    width:80vw;
+    position: relative;
+    overflow: scroll;
+    padding:25px;
 }

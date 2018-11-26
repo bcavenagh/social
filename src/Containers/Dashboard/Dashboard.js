@@ -26,8 +26,8 @@ class Dashboard extends Component {
             <div className={classes.Dashboard}>
                 <AppBar position="static" color="default" className={classes.AppBar}>
                     <Toolbar>
-                        <Typography variant="h6" color="inherit">
-                            <h3>{this.props.group}</h3>
+                        <Typography variant="h3" color="inherit">
+                            {this.props.group}
                         </Typography>
                     </Toolbar>
                 </AppBar>

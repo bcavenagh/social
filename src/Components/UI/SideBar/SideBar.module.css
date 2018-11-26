@@ -1,16 +1,16 @@
 .SideBar{
     width:20vw;
     position: relative;
-    overflow: scroll;
+    overflow: hidden;
     background-color: #e8f1f2;
     z-index: 150;
 }
 .Groups{
-    height:90%;
-    overflow: scroll;
+    height:93%;
+    overflow-y: scroll;
 }
 .CreateGroupButton{
-    height:10%;
+    height:7%;
     width:100%;
 }
 .Button{

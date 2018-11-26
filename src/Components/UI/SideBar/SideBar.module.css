@@ -17,6 +17,7 @@
     height:100%;
     width:100%;
     background-color:rgba(73, 212, 157, 0.75) !important;
+    /* background: linear-gradient(0deg, rgb(108, 175, 144), rgba(73, 212, 157, 0.75)) !important;     */
     border-radius: 0px !important;
 }
 .Button:hover{
@@ -25,5 +26,5 @@
 .ButtonText{
     font-weight: 900 !important;
     color:white !important;
-    text-shadow: 0px 0px 10px black;
+    text-shadow: 0px 0px 10px rgba(0,0,0,0.75);
 }

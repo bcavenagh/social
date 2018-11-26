@@ -1,11 +1,12 @@
 .TopBar{
-    background-color:red;
+    background-color:#49d49d;
     height:10vh;
     width:100%;
     display:flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 200;
+    z-index:175;
+    box-shadow: 0px 0px 42px 0px rgba(0,0,0,1);
 }
 .Logo, .Logo img{
     height:100%;

@@ -1,6 +1,29 @@
 .SideBar{
-    background-color: cadetblue;
     width:20vw;
     position: relative;
     overflow: scroll;
+    background-color: #e8f1f2;
+    z-index: 150;
+}
+.Groups{
+    height:90%;
+    overflow: scroll;
+}
+.CreateGroupButton{
+    height:10%;
+    width:100%;
+}
+.Button{
+    height:100%;
+    width:100%;
+    background-color:rgba(73, 212, 157, 0.75) !important;
+    border-radius: 0px !important;
+}
+.Button:hover{
+    background-color:rgba(73, 212, 157, 1) !important;
+}
+.ButtonText{
+    font-weight: 900 !important;
+    color:white !important;
+    text-shadow: 0px 0px 10px black;
 }

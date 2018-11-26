@@ -1,11 +1,11 @@
 .Group{
-    /* Need to be the same to keep text centered in <li> */
     height:50px;
-    line-height:50px;
-    /* ^^^^^^^^^^ */
+}
 
-    list-style-type: none;
-    background-color: coral;
-    text-align: center;
-
+.Divider{
+    background-color: #49d49d !important;
+    margin-left:45px !important;
+}
+.GroupTitle{
+    text-align: right;
 }

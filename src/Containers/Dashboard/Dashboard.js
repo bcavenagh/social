@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import classes from './Dashboard.module.css';
 import Events from '../../Components/UI/Events/Events';
+import { Button, Tooltip } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
 
 class Dashboard extends Component {
     constructor(props){
@@ -23,6 +25,11 @@ class Dashboard extends Component {
         return( 
             <div className={classes.Dashboard}>
                 <Events events={this.state.events}/>
+                <Tooltip title="Add Event" placement="bottom">
+                    <Button variant="fab" color="primary" aria-label="Add" className={classes.AddEventButton}>
+                        <AddIcon />
+                    </Button>
+                </Tooltip>
             </div>
          );
     }

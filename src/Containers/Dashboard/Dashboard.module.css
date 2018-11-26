@@ -1,7 +1,18 @@
 .Dashboard{
-    background-color: pink;
+    background-color: #f4f4f6;
     width:80vw;
     position: relative;
     overflow: scroll;
     padding:25px;
+    z-index: 125;
+    box-shadow: inset 4px 17px 76px -30px rgba(0,0,0,0.75);
+}
+.AddEventButton{
+    background-color: rgba(73, 212, 157, 1) !important;
+    position: fixed !important;
+    bottom:45px;
+    right:45px;
+}
+.Tooltip{
+    font-size: 15px;
 }

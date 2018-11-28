@@ -10,18 +10,17 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-
 const event = (props) => (
     <Card className={classes.card}>
       <CardActionArea>
-        <CardMedia
+        {/* <CardMedia
           component="img"
           alt="Contemplative Reptile"
           className={classes.media}
           height="140"
           image="https://via.placeholder.com/150x100"
           title="Contemplative Reptile"
-        />
+        /> */}
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {props.name}

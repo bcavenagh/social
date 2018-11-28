@@ -24,9 +24,14 @@ class SideBar extends Component {
   }
   
 render(){
-    let sidebarclass = 'Sidebar open';
+    let sideBarClasses;
+    if(this.props.show){
+        sideBarClasses = [classes.SideBar, classes.Open].join(' ');
+    }else{
+        sideBarClasses = [classes.SideBar]
+    }
     return(
-        <div className={classes.SideBar}>
+        <div className={sideBarClasses}>
             <div className={classes.Groups}> 
                 <Groups groups={this.state.groups}/>
             </div>

@@ -3,6 +3,7 @@ import classes from './Dashboard.module.css';
 import Events from '../../Components/UI/Events/Events';
 import { Button, Tooltip, AppBar, Toolbar, Typography, Modal } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import EventForm from '../../Components/Forms/EventForm';
 
 class Dashboard extends Component {
     constructor(props){
@@ -53,9 +54,7 @@ class Dashboard extends Component {
                     open={this.state.open}
                     onClose={this.handleClose}
                 >
-                    <div>
-                        <p>This is the modal</p>
-                    </div>
+                    <EventForm/>
                 </Modal>
             </div>
          );

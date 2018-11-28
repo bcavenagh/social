@@ -1,9 +1,10 @@
 .SideBar{
-    width:20vw;
+    width:0vw;
     position: relative;
     overflow: hidden;
     background-color: #e8f1f2;
-    z-index: 150;
+    z-index: 150; 
+    transition: all .5s;
 }
 .Groups{
     height:93%;
@@ -27,4 +28,7 @@
     font-weight: 900 !important;
     color:white !important;
     text-shadow: 0px 0px 10px rgba(0,0,0,0.75);
+}
+.Open{
+    width:20vw;
 }

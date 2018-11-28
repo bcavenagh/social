@@ -9,27 +9,27 @@ class TopBar extends Component{
     constructor(props){
         super(props);
         this.state = ({
-            auth:true
+            auth:true,
+            sidebar: true
         })
     }
     handleChange = event => {
         this.setState({ auth: event.target.checked });
-      };
-    
-      handleMenu = event => {
+    };
+
+    handleProfileMenu = event => {
         this.setState({ anchorEl: event.currentTarget });
-      };
-    
-      handleClose = () => {
+    };
+    handleProfileClose = () => {
         this.setState({ anchorEl: null });
-      };
+    };
     render(){
         const { auth, anchorEl } = this.state;
         const open = Boolean(anchorEl);
         return(
             <header className={classes.TopBar}>
                 <Toolbar>
-                    <IconButton color="inherit" aria-label="Menu">
+                    <IconButton color="inherit" onClick={this.props.toggle} aria-label="Menu">
                         <MenuIcon />
                     </IconButton>
                 </Toolbar>
@@ -39,7 +39,7 @@ class TopBar extends Component{
                         <IconButton
                         aria-owns={open ? 'menu-appbar' : undefined}
                         aria-haspopup="true"
-                        onClick={this.handleMenu}
+                        onClick={this.handleProfileMenu}
                         color="inherit"
                         >
                             <AccountCircle />
@@ -56,10 +56,10 @@ class TopBar extends Component{
                             horizontal: 'right',
                         }}
                         open={open}
-                        onClose={this.handleClose}
+                        onClose={this.handleProfileClose}
                         >
-                            <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                            <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+                            <MenuItem onClick={this.handleProfileClose}>Profile</MenuItem>
+                            <MenuItem onClick={this.handleProfileClose}>Logout</MenuItem>
                         </Menu>
                     </div>
                 )}

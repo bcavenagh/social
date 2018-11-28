@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classes from './Dashboard.module.css';
 import Events from '../../Components/UI/Events/Events';
-import { Button, Tooltip, AppBar, Toolbar, Typography } from '@material-ui/core';
+import { Button, Tooltip, AppBar, Toolbar, Typography, Modal } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 
 class Dashboard extends Component {
@@ -18,9 +18,19 @@ class Dashboard extends Component {
                     {name:"Fred Birthday", description:"This is a group event.", id:7},
                     {name:"Labor Day", description:"This is a group event.", id:9},
                     {name:"Bar Crawl", description:"This is a group event.", id:10}
-                ]
+                ],
+                open: false
             }
     }
+
+    handleOpen = () => {
+        this.setState({ open: true });
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+
     render(){
         return( 
             <div className={classes.Dashboard}>
@@ -33,10 +43,20 @@ class Dashboard extends Component {
                 </AppBar>
                 <Events events={this.state.events}/>
                 <Tooltip title="Add Event" placement="bottom">
-                    <Button variant="fab" color="primary" aria-label="Add" className={classes.AddEventButton}>
+                    <Button variant="fab" color="primary" onClick={this.handleOpen} aria-label="Add" className={classes.AddEventButton}>
                         <AddIcon />
                     </Button>
                 </Tooltip>
+                <Modal
+                    aria-labelledby="simple-modal-title"
+                    aria-describedby="simple-modal-description"
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                >
+                    <div>
+                        <p>This is the modal</p>
+                    </div>
+                </Modal>
             </div>
          );
     }

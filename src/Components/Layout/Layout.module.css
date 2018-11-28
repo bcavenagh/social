@@ -6,3 +6,6 @@
     display:flex;
     z-index:135;
 }
+.Side{
+    width: 50vw;
+}

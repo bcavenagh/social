@@ -7,26 +7,11 @@ const events = (props) => (
     <div>
         <Grid container spacing={24}>
             {props.events.map(event => 
-                <Grid item xs={12} sm={4}>
+                <Grid item xs={12} sm={4} md={3} xl={2}>
                     <Event name={event.name} description={event.description} key={event.id}/>
                 </Grid>
             )}
         </Grid> 
-        {/* <Event name="Thanksgiving"/>
-        <Event name="Christmas"/>
-        <Event name="New Year"/>
-        <Event name="Thanksgiving"/>
-        <Event name="Christmas"/>
-        <Event name="New Year"/>
-        <Event name="Thanksgiving"/>
-        <Event name="Christmas"/>
-        <Event name="New Year"/>
-        <Event name="Thanksgiving"/>
-        <Event name="Christmas"/>
-        <Event name="New Year"/>
-        <Event name="Thanksgiving"/>
-        <Event name="Christmas"/>
-        <Event name="New Year"/> */}
     </div>
 );
 

@@ -1,6 +1,6 @@
 .EventForm{
     width:50%;
-    height:50%;
+    height:auto;
     position: absolute;
     top:50%;
     left:50%;
@@ -8,14 +8,17 @@
 }
 .FormTitle{
     width:100%;
-    height:10%;
+    height:auto;
     background: linear-gradient(0deg, rgb(108, 175, 144), rgb(73, 212, 157));
+    padding:15px 0 15px 0;
+}
+legend{
+    border-bottom: none !important;
 }
 h4{
     /* border-bottom: 1px solid #40F281; */
     text-align: center;
     margin:0;
-    padding:15px 0 15px 0;
     color:white;
 }
 .InputContainer{

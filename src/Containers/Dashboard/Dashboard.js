@@ -32,7 +32,7 @@ class Dashboard extends Component {
         this.setState({ open: false });
     };
     handleEventAdd = () => {
-
+        //This
     };
 
     render(){

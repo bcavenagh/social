@@ -10,15 +10,16 @@ class Dashboard extends Component {
         super(props);
             this.state={
                 events:[
-                    {name:"Test", description:"This is a group event.", id:1},
-                    {name:"Test", description:"This is a group event.", id:2},
-                    {name:"Test", description:"This is a group event.", id:3},
-                    {name:"Test", description:"This is a group event.", id:4},
-                    {name:"Test", description:"This is a group event.", id:5},
-                    {name:"Test", description:"This is a group event.", id:6},
-                    {name:"Test", description:"This is a group event.", id:7},
-                    {name:"Test", description:"This is a group event.", id:9},
-                    {name:"Test", description:"This is a group event.", id:10}
+                    {name:'Test 1'},
+                    // {name:"Test", description:"This is a group event.", id:1},
+                    // {name:"Test", description:"This is a group event.", id:2},
+                    // {name:"Test", description:"This is a group event.", id:3},
+                    // {name:"Test", description:"This is a group event.", id:4},
+                    // {name:"Test", description:"This is a group event.", id:5},
+                    // {name:"Test", description:"This is a group event.", id:6},
+                    // {name:"Test", description:"This is a group event.", id:7},
+                    // {name:"Test", description:"This is a group event.", id:9},
+                    // {name:"Test", description:"This is a group event.", id:10}
                 ],
                 open: false
             }
@@ -31,8 +32,12 @@ class Dashboard extends Component {
     handleClose = () => {
         this.setState({ open: false });
     };
-    handleEventAdd = () => {
-        //This
+    handleEventAdd = (event) => {
+        this.setState(previousState => ({
+            events: [...previousState.events, event]
+        }));
+        console.log("Event: " + event);
+        console.log("Events Array: " + this.state.events);
     };
 
     render(){

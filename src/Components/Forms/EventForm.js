@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Paper, Input, TextField, Button } from '@material-ui/core';
 import classes from './EventForm.module.css';
+import Event from '../UI/Events/Event.js/Event';
 
 class EventForm extends Component {
     constructor(props){
@@ -23,13 +24,15 @@ class EventForm extends Component {
         let alertString = "Event Name: " + this.state.eventName + "\n Event Date: " + this.state.eventDate + "\n Event Description: " + this.state.eventDesc;
         alert('An event was submitted: \n' + alertString);
         event.preventDefault();
+        this.props.add({
+            name:this.state.eventName,
+            // description:this.state.eventDesc
+        });
     }
 
     render(){
         return(
         <Paper className={classes.EventForm}>
-            
-
             <form onSubmit={this.handleSubmit}>
                 <div className={classes.FormTitle}><h4>Create a New Event</h4></div>
                 <div className={classes.InputContainer}>

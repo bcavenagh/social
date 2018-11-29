@@ -6,7 +6,9 @@ class EventForm extends Component {
     constructor(props){
         super(props);
         this.state = {
-            value: ''
+            eventName: '',
+            eventDate: this.props.date,
+            eventDesc: ''
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -18,7 +20,8 @@ class EventForm extends Component {
     }
 
     handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.value);
+        let alertString = "Event Name: " + this.state.eventName + "\n Event Date: " + this.state.eventDate + "\n Event Description: " + this.state.eventDesc;
+        alert('An event was submitted: \n' + alertString);
         event.preventDefault();
     }
 
@@ -33,15 +36,16 @@ class EventForm extends Component {
                     <TextField
                         id="standard-name"
                         label="Event Name"
-                        value={this.state.value}
-                        onChange={this.handleChange('value')}
+                        value={this.state.eventName}
+                        onChange={this.handleChange('eventName')}
                         className={classes.input}
                     />
                     <TextField
-                        id="datetime-local"
+                        id="date"
                         label="Event Date"
-                        type="datetime-local"
-                        defaultValue="2017-05-24T10:30"
+                        type="date"
+                        value={this.state.eventDate}
+                        onChange={this.handleChange('eventDate')}
                         className={classes.input}
                         InputLabelProps={{
                         shrink: true,
@@ -49,11 +53,11 @@ class EventForm extends Component {
                     />
                     <TextField
                         id="outlined-multiline-flexible"
-                        label="Multiline"
+                        label="Description"
                         multiline
                         rowsMax="4"
-                        // value={this.state.multiline}
-                        // onChange={this.handleChange('multiline')}
+                        value={this.state.eventDesc}
+                        onChange={this.handleChange('eventDesc')}
                         className={classes.input}
                         margin="normal"
                         variant="outlined"

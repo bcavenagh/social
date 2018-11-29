@@ -10,15 +10,15 @@ class Dashboard extends Component {
         super(props);
             this.state={
                 events:[
-                    {name:"Thanksgiving", description:"This is a group event.", id:1},
-                    {name:"Friendsgiving", description:"This is a group event.", id:2},
-                    {name:"Christmas", description:"This is a group event.", id:3},
-                    {name:"Bunco Night", description:"This is a group event.", id:4},
-                    {name:"New Year's Eve", description:"This is a group event.", id:5},
-                    {name:"New Year's", description:"This is a group event.", id:6},
-                    {name:"Fred Birthday", description:"This is a group event.", id:7},
-                    {name:"Labor Day", description:"This is a group event.", id:9},
-                    {name:"Bar Crawl", description:"This is a group event.", id:10}
+                    {name:"Test", description:"This is a group event.", id:1},
+                    {name:"Test", description:"This is a group event.", id:2},
+                    {name:"Test", description:"This is a group event.", id:3},
+                    {name:"Test", description:"This is a group event.", id:4},
+                    {name:"Test", description:"This is a group event.", id:5},
+                    {name:"Test", description:"This is a group event.", id:6},
+                    {name:"Test", description:"This is a group event.", id:7},
+                    {name:"Test", description:"This is a group event.", id:9},
+                    {name:"Test", description:"This is a group event.", id:10}
                 ],
                 open: false
             }
@@ -31,8 +31,22 @@ class Dashboard extends Component {
     handleClose = () => {
         this.setState({ open: false });
     };
+    handleEventAdd = () => {
+
+    };
 
     render(){
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        if(dd<10) {
+            dd = '0'+dd
+        } 
+        if(mm<10) {
+            mm = '0'+mm
+        } 
+        today = yyyy + '-' + mm + '-' + dd;
         return( 
             <div className={classes.Dashboard}>
                 <AppBar position="static" color="default" className={classes.AppBar}>
@@ -54,7 +68,7 @@ class Dashboard extends Component {
                     open={this.state.open}
                     onClose={this.handleClose}
                 >
-                    <EventForm/>
+                    <EventForm date={today} add={this.handleEventAdd}/>
                 </Modal>
             </div>
          );

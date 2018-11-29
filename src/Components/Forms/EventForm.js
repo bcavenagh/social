@@ -22,11 +22,12 @@ class EventForm extends Component {
 
     handleSubmit(event) {
         let alertString = "Event Name: " + this.state.eventName + "\n Event Date: " + this.state.eventDate + "\n Event Description: " + this.state.eventDesc;
-        alert('An event was submitted: \n' + alertString);
+        // alert('An event was submitted: \n' + alertString);
         event.preventDefault();
         this.props.add({
             name:this.state.eventName,
-            // description:this.state.eventDesc
+            description:this.state.eventDesc,
+            id:this.state.eventName + Math.random() * (100 - 1) + 1
         });
     }
 

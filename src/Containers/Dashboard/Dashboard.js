@@ -10,7 +10,7 @@ class Dashboard extends Component {
         super(props);
             this.state={
                 events:[
-                    {name:'Test 1'},
+                    {name:'Example Event', description:'Here is what an event would look like in your dashboard. This is where the description of the event is written. It will stretch the card to fit the wording.'}
                     // {name:"Test", description:"This is a group event.", id:1},
                     // {name:"Test", description:"This is a group event.", id:2},
                     // {name:"Test", description:"This is a group event.", id:3},
@@ -36,8 +36,6 @@ class Dashboard extends Component {
         this.setState(previousState => ({
             events: [...previousState.events, event]
         }));
-        console.log("Event: " + event);
-        console.log("Events Array: " + this.state.events);
     };
 
     render(){

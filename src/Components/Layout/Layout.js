@@ -8,7 +8,7 @@ class Layout extends Component {
     constructor(props){
         super(props);
         this.state = ({
-            group: 'Group Name',
+            group: '',
             sidebarOpen: true
         })
     }
@@ -17,13 +17,19 @@ class Layout extends Component {
             return{ sidebarOpen: !prevState.sidebarOpen };
         });
     }
+    toggleGroup = (name) => {
+        this.setState({
+            group: name
+        })
+    }
     render(){
-
         return( 
             <>
                 <TopBar toggle={this.toggleSideBar} isOpen={this.state.sidebar} />
                 <main className={classes.Main}>
-                    <SideBar show={this.state.sidebarOpen}/>
+                    <SideBar 
+                        show={this.state.sidebarOpen} 
+                        toggleGroup={this.toggleGroup}/>
                     <Dashboard group={this.state.group}/>
                 </main>
             </>

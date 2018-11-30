@@ -7,15 +7,15 @@ class GroupForm extends Component {
         super(props);
         this.state = {
             groupName: '',
-            groupDesc: ''
+            groupDesc: '',
+            groupIndex: 0
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
     handleChange = name => event => {
-        this.setState({[name]: event.target.value,});
+        this.setState({[name]: event.target.value, groupIndex: this.props.groupCount});
     }
 
     handleSubmit(group) {
@@ -24,11 +24,11 @@ class GroupForm extends Component {
         this.props.add({
             name:this.state.groupName,
             // description:this.state.groupName,
-            id:this.state.eventName + Math.random() * (100 - 1) + 1
+            id:this.state.groupIndex
         });
     }
 
-    render(){
+    render(){        
         return(
         <Paper className={classes.GroupForm}>
             <form onSubmit={this.handleSubmit}>

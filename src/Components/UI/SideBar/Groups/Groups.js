@@ -8,7 +8,7 @@ const groups = (props) => (
     <List component="nav" className={classes.GroupContainer}>
         {
             props.groups.map(group => 
-                <Group name={group.name} key={group.id}/>
+                <Group name={group.name} key={group.id} id={group.id}/>
             )
         }
     </List>

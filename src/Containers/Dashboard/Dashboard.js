@@ -3,7 +3,7 @@ import classes from './Dashboard.module.css';
 import Events from '../../Components/UI/Events/Events';
 import { Button, Tooltip, AppBar, Toolbar, Typography, Modal } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import EventForm from '../../Components/Forms/EventForm';
+import EventForm from '../../Components/Forms/EventForm/EventForm';
 
 class Dashboard extends Component {
     constructor(props){
@@ -11,15 +11,6 @@ class Dashboard extends Component {
             this.state={
                 events:[
                     {name:'Example Event', description:'Here is what an event would look like in your dashboard. This is where the description of the event is written. It will stretch the card to fit the wording.'}
-                    // {name:"Test", description:"This is a group event.", id:1},
-                    // {name:"Test", description:"This is a group event.", id:2},
-                    // {name:"Test", description:"This is a group event.", id:3},
-                    // {name:"Test", description:"This is a group event.", id:4},
-                    // {name:"Test", description:"This is a group event.", id:5},
-                    // {name:"Test", description:"This is a group event.", id:6},
-                    // {name:"Test", description:"This is a group event.", id:7},
-                    // {name:"Test", description:"This is a group event.", id:9},
-                    // {name:"Test", description:"This is a group event.", id:10}
                 ],
                 open: false
             }
@@ -36,6 +27,7 @@ class Dashboard extends Component {
         this.setState(previousState => ({
             events: [...previousState.events, event]
         }));
+        this.handleClose();
     };
 
     render(){

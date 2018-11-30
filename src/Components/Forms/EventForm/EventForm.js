@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Paper, Input, TextField, Button } from '@material-ui/core';
 import classes from './EventForm.module.css';
-import Event from '../UI/Events/Event.js/Event';
+import Event from '../../UI/Events/Event.js/Event';
 
 class EventForm extends Component {
     constructor(props){

@@ -4,18 +4,23 @@ import Events from '../../Components/UI/Events/Events';
 import { Button, Tooltip, AppBar, Toolbar, Typography, Modal } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import EventForm from '../../Components/Forms/EventForm/EventForm';
+import fire from 'firebase';
 
 class Dashboard extends Component {
     constructor(props){
         super(props);
             this.state={
                 events:[
-                    {name:'Example Event', description:'Here is what an event would look like in your dashboard. This is where the description of the event is written. It will stretch the card to fit the wording.'}
+                    {name:'Example Event', 
+                    description:'Here is what an event would look like in your dashboard. This is where the description of the event is written. It will stretch the card to fit the wording.', 
+                    groupid: this.props.groupId}
                 ],
                 open: false
             }
     }
-
+    componentDidMount(){
+        const groupRef = fire.database().ref('groups')
+    }
     handleOpen = () => {
         this.setState({ open: true });
     };
@@ -49,9 +54,12 @@ class Dashboard extends Component {
                         <Typography variant="h3" color="inherit">
                             {this.props.group}
                         </Typography>
+                        <p>{this.props.groupId}</p>
                     </Toolbar>
                 </AppBar>
+                
                 <Events events={this.state.events}/>
+
                 <Tooltip title="Add Event" placement="bottom">
                     <Button variant="fab" color="primary" onClick={this.handleOpen} aria-label="Add" className={classes.AddEventButton}>
                         <AddIcon />
@@ -63,7 +71,7 @@ class Dashboard extends Component {
                     open={this.state.open}
                     onClose={this.handleClose}
                 >
-                    <EventForm date={today} add={this.handleEventAdd}/>
+                    <EventForm date={today} add={this.handleEventAdd} group={this.props.groupId}/>
                 </Modal>
             </div>
          );

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Paper, Input, TextField, Button } from '@material-ui/core';
 import classes from './GroupForm.module.css';
-
+import fire from '../../../firebase';
 class GroupForm extends Component {
     constructor(props){
         super(props);
@@ -21,10 +21,17 @@ class GroupForm extends Component {
     handleSubmit(group) {
         let alertString = "Group Name: " + this.state.groupName + "\n Group Description: " + this.state.groupDesc;
         group.preventDefault();
+
+        //Hadnling forming the group for Firebase
+        const groupsRef = fire.database().ref('groups');
+        console.log("Groups Ref:" + groupsRef)
+        const groupId = groupsRef.push().key;
+
         this.props.add({
             name:this.state.groupName,
             // description:this.state.groupName,
-            id:this.state.groupIndex
+            id:groupId,
+            index: this.state.groupIndex
         });
     }
 
@@ -32,7 +39,7 @@ class GroupForm extends Component {
         return(
         <Paper className={classes.GroupForm}>
             <form onSubmit={this.handleSubmit}>
-                <div className={classes.FormTitle}><h4>Create a New Event</h4></div>
+                <div className={classes.FormTitle}><h4>Create a New Group</h4></div>
                 <div className={classes.InputContainer}>
                     <TextField
                         id="standard-name"

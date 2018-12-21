@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Paper, Input, TextField, Button } from '@material-ui/core';
 import classes from './EventForm.module.css';
 import Event from '../../UI/Events/Event.js/Event';
+import firebase from '../../../firebase';
 
 class EventForm extends Component {
     constructor(props){
@@ -21,14 +22,18 @@ class EventForm extends Component {
     }
 
     handleSubmit(event) {
-        let alertString = "Event Name: " + this.state.eventName + "\n Event Date: " + this.state.eventDate + "\n Event Description: " + this.state.eventDesc;
-        // alert('An event was submitted: \n' + alertString);
         event.preventDefault();
-        this.props.add({
+        const newEvent = {
             name:this.state.eventName,
             description:this.state.eventDesc,
-            id:this.state.eventName + Math.random() * (100 - 1) + 1
-        });
+            // id:this.state.eventName + Math.random() * (100 - 1) + 1
+            groupid:this.props.group
+        };
+
+        const eventsRef = firebase.database().ref('events');
+        
+        this.props.add(newEvent);
+        eventsRef.push(newEvent);
     }
 
     render(){
@@ -66,6 +71,7 @@ class EventForm extends Component {
                         margin="normal"
                         variant="outlined"
                     />
+                    <p>{this.props.group}</p>
                 </div>
                 <Button type="submit" value="Submit" className={classes.Submit}>
                     Submit

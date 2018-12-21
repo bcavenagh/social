@@ -8,7 +8,7 @@ const events = (props) => (
         <Grid container spacing={24}>
             {props.events.map(event => 
                 <Grid item xs={12} sm={4} md={3} xl={2}>
-                    <Event name={event.name} description={event.description} key={event.id}/>
+                    <Event name={event.name} description={event.description} id={event.groupid} key={event.groupid}/>
                 </Grid>
             )}
         </Grid> 

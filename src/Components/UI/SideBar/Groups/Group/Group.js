@@ -4,19 +4,19 @@ import { List, ListItem, ListItemIcon, ListItemText, Divider } from '@material-u
 import InboxIcon from '@material-ui/icons/Inbox';
 
 const group = (props) => {
-    let id = props.id
+    let index = props.index
     return(
         <>
         <ListItem
             button
-            selected={props.selected === id}
+            selected={props.selected === index}
             className={classes.Group}
-            onClick={(e) => props.handleSelected(id)} 
+            onClick={(e) => props.handleSelected(index)} 
         >
             <ListItemText 
                 className={classes.GroupTitle} 
                 primary={props.name} 
-                key={props.key}/>
+                key={props.id}/>
         </ListItem>
         <Divider className={classes.Divider}/>
         </>

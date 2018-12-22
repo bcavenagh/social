@@ -23,17 +23,20 @@ class EventForm extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+
+        const eventsRef = firebase.database().ref('events');
+
         const newEvent = {
             name:this.state.eventName,
             description:this.state.eventDesc,
             // id:this.state.eventName + Math.random() * (100 - 1) + 1
-            groupid:this.props.group
+            groupid:this.props.group,
+            id: eventsRef.push().key
         };
 
-        const eventsRef = firebase.database().ref('events');
         
         this.props.add(newEvent);
-        eventsRef.push(newEvent);
+        // eventsRef.push(newEvent);
     }
 
     render(){

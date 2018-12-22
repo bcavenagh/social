@@ -20,7 +20,7 @@ class SideBar extends Component {
     }
     componentDidMount(){        
         this.setGroups();
-        this.props.toggleGroup('1', 1, 'asjhdbvfasdv')
+        // this.props.toggleGroup('1', 1, 'asjhdbvfasdv')
         // this.props.toggleGroup(this.state.groups[this.state.selectedIndex].name)
     }
     setGroups(){
@@ -31,7 +31,6 @@ class SideBar extends Component {
         const idArray = [];
         groupRef.once('value', snapshot => {
             snapshot.forEach(group => {
-                console.log('groupid: ' + group.key);
                 idArray.push(group.key);
                 let addGroup = {
                     id: group.key,
@@ -39,16 +38,14 @@ class SideBar extends Component {
                 }
                 if(groupArray.length !== idArray.length){
                     groupArray.push(addGroup);
-                    console.log('pushed');
                 }
             })
-            
+            this.props.toggleGroup(groupArray[0].name, 0, groupArray[0].id )
             this.setState(previousState => ({
                 groups: groupArray
             }));
         })
         //{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}
-        console.log('in setGroups');
     }
     handleOpen = () => {
         this.setState({ open: true });

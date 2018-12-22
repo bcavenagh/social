@@ -11,15 +11,45 @@ class Dashboard extends Component {
         super(props);
             this.state={
                 events:[
-                    {name:'Example Event', 
-                    description:'Here is what an event would look like in your dashboard. This is where the description of the event is written. It will stretch the card to fit the wording.', 
-                    groupid: this.props.groupId}
+                    // {name:'Example Event', 
+                    // description:'Here is what an event would look like in your dashboard. This is where the description of the event is written. It will stretch the card to fit the wording.', 
+                    // groupid: this.props.groupId}
                 ],
-                open: false
+                open: false,
+                hasEvents: false,
+                groupid: ''
             }
     }
     componentDidMount(){
-        const groupRef = fire.database().ref('groups')
+        // this.setState({groupid: this.props.groupId})
+        this.setEvents();
+    }
+    setEvents(){
+        let tempIdHold = []
+        console.log(this.props.groupId)
+        if(this.props.groupId != null){
+            
+            const groupRef = fire.database().ref('groups');
+            groupRef.once('value', snapshot =>{
+                if(snapshot.val()){
+                    snapshot.forEach(snap => {
+                        console.log(snap.id)
+                        // tempIdHold.push(snap.id)
+                    })
+                    this.setState({hasEvents: true});
+                }else{
+                    this.setState({hasEvents: false});
+                }
+            });
+        }
+        
+
+        // const eventsRef = fire.database().ref('events');
+        // const eventArray = [];
+        // const idArray = [];
+        // eventsRef.once('value', snapshot => {
+
+        // });
     }
     handleOpen = () => {
         this.setState({ open: true });
@@ -29,6 +59,17 @@ class Dashboard extends Component {
         this.setState({ open: false });
     };
     handleEventAdd = (event) => {
+
+        fire.database().ref('events').child(event.id).set({
+            name: event.name,
+            description: event.description,
+            groupid: event.groupid,
+            id: event.id
+        });
+        fire.database().ref('groups').child(event.groupid).child('events').child(event.id).set({
+            id:event.id
+        });
+
         this.setState(previousState => ({
             events: [...previousState.events, event]
         }));

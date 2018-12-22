@@ -14,7 +14,7 @@ const groups = (props) => (
                     id = {group.id}
                     index={index} 
                     selected={props.selected} 
-                    handleSelected={props.handleSelected}/>
+                    handleSelected={props.handleSelected} />
             )
         }
     </List>

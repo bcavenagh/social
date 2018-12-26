@@ -16,40 +16,8 @@ class Dashboard extends Component {
                     // groupid: this.props.groupId}
                 ],
                 open: false,
-                hasEvents: false,
                 groupid: ''
             }
-    }
-    componentDidMount(){
-        // this.setState({groupid: this.props.groupId})
-        this.setEvents();
-    }
-    setEvents(){
-        let tempIdHold = []
-        console.log(this.props.groupId)
-        if(this.props.groupId != null){
-            
-            const groupRef = fire.database().ref('groups');
-            groupRef.once('value', snapshot =>{
-                if(snapshot.val()){
-                    snapshot.forEach(snap => {
-                        console.log(snap.id)
-                        // tempIdHold.push(snap.id)
-                    })
-                    this.setState({hasEvents: true});
-                }else{
-                    this.setState({hasEvents: false});
-                }
-            });
-        }
-        
-
-        // const eventsRef = fire.database().ref('events');
-        // const eventArray = [];
-        // const idArray = [];
-        // eventsRef.once('value', snapshot => {
-
-        // });
     }
     handleOpen = () => {
         this.setState({ open: true });
@@ -59,7 +27,6 @@ class Dashboard extends Component {
         this.setState({ open: false });
     };
     handleEventAdd = (event) => {
-
         fire.database().ref('events').child(event.id).set({
             name: event.name,
             description: event.description,
@@ -88,6 +55,12 @@ class Dashboard extends Component {
             mm = '0'+mm
         } 
         today = yyyy + '-' + mm + '-' + dd;
+        let content = "";
+        if(this.props.hasEvents){
+            content = <Events events={this.props.events} group={this.props.group}/>; 
+        }else{
+            content = this.props.children;
+        }
         return( 
             <div className={classes.Dashboard}>
                 <AppBar position="static" color="default" className={classes.AppBar}>
@@ -99,7 +72,7 @@ class Dashboard extends Component {
                     </Toolbar>
                 </AppBar>
                 
-                <Events events={this.state.events}/>
+                {content}
 
                 <Tooltip title="Add Event" placement="bottom">
                     <Button variant="fab" color="primary" onClick={this.handleOpen} aria-label="Add" className={classes.AddEventButton}>

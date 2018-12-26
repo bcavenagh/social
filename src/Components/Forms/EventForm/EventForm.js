@@ -29,7 +29,6 @@ class EventForm extends Component {
         const newEvent = {
             name:this.state.eventName,
             description:this.state.eventDesc,
-            // id:this.state.eventName + Math.random() * (100 - 1) + 1
             groupid:this.props.group,
             id: eventsRef.push().key
         };

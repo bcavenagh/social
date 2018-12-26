@@ -3,7 +3,8 @@ import classes from './Layout.module.css';
 import TopBar from '../UI/TopBar/TopBar';
 import SideBar from '../UI/SideBar/SideBar';
 import Dashboard from '../../Containers/Dashboard/Dashboard';
-import firebase from 'firebase';
+import Spinner from '../UI/Spinner/Spinner';
+import fire from 'firebase';
 
 class Layout extends Component {
     constructor(props){
@@ -12,7 +13,10 @@ class Layout extends Component {
             group: '',
             sidebarOpen: true,
             id:'',
-            index:''
+            index:-1,
+            events:[],
+            hasEvents: false,
+            loading: false
         })
     }
     
@@ -27,20 +31,70 @@ class Layout extends Component {
             index: index,
             id: id
         })
+        this.setEvents(id);
+    }
+    setEvents(id){
+        this.setState({loading: true});
+        let tempIdHold = [];
+        if(id != null){
+            const groupRef = fire.database().ref('groups').child(id).child('events');
+            groupRef.once('value', snapshot =>{
+                if(snapshot.val()){
+                    snapshot.forEach(snap => {
+                        tempIdHold.push(snap.key);
+                    });
+                    this.setState({hasEvents: true}, () => {this.fetchEvents(tempIdHold);});
+                }else{
+                    this.setState({hasEvents: false});
+                }
+            });
+        }
+    }
+
+    fetchEvents(tempIdHold) {
+        const eventsRef = fire.database().ref('events');
+        const tempEventHold = [];
+        tempIdHold.forEach(event => {
+            eventsRef.child(event).once('value', snapshot => {
+                let newEvent = {
+                    name:snapshot.val().name,
+                    description:snapshot.val().description,
+                    groupid:this.props.group,
+                    id: eventsRef.push().key
+                };
+                tempEventHold.push(newEvent);    
+                this.setState({
+                    events: tempEventHold,
+                    loading:false
+                });                
+            }); 
+        });
     }
     //REFRESH DASHBOARD
+
     render(){
-        return( 
-            <>
-                <TopBar toggle={this.toggleSideBar} isOpen={this.state.sidebar} />
-                <main className={classes.Main}>
-                    <SideBar 
-                        show={this.state.sidebarOpen} 
-                        toggleGroup={this.toggleGroup}/>
-                    <Dashboard group={this.state.group} groupId={this.state.id}/>
-                </main>
-            </>
-        );
+        let dash = null
+        if(this.state.index < 0){
+            dash = <p>Please select a group to get started!</p>;
+        }else if(!(this.state.hasEvents)){
+            dash = <Dashboard group={this.state.group} groupId={this.state.id} hasEvents={false}>There are no events planned for this group yet. Go ahead and add one!</Dashboard>
+        }else if(this.state.loading){
+            dash = <Spinner/>
+        }
+        else{
+            dash = <Dashboard group={this.state.group} groupId={this.state.id} events={this.state.events} hasEvents={true} />
+        }
+            return(
+                <>
+                    <TopBar toggle={this.toggleSideBar} isOpen={this.state.sidebar} />
+                    <main className={classes.Main}>
+                        <SideBar 
+                            show={this.state.sidebarOpen} 
+                            toggleGroup={this.toggleGroup}/>
+                        {dash}
+                    </main>
+                </>
+            )
     }
 }
 

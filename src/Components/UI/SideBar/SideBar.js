@@ -15,7 +15,7 @@ class SideBar extends Component {
                 // {name:'Group 1', id: 0},
             ],
             open: false,
-            selectedIndex: 0
+            selectedIndex: -1
         };
     }
     componentDidMount(){        
@@ -40,7 +40,7 @@ class SideBar extends Component {
                     groupArray.push(addGroup);
                 }
             })
-            this.props.toggleGroup(groupArray[0].name, 0, groupArray[0].id )
+            // this.props.toggleGroup(groupArray[0].name, 0, groupArray[0].id )
             this.setState(previousState => ({
                 groups: groupArray
             }));
@@ -58,7 +58,7 @@ class SideBar extends Component {
         
             this.setState({ selectedIndex: id });
             let group = this.state.groups[id];
-            console.log(group)
+            // console.log(group)
             this.props.toggleGroup(group.name, group.index, group.id);
         
     };

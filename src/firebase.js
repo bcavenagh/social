@@ -1,4 +1,4 @@
-import fire from 'firebase'  
+import fire from 'firebase';
   var config = {
     apiKey: "AIzaSyDBiG6wdq5_94LzJ4D6HadnL7iMrzU3a1o",
     authDomain: "social-a969a.firebaseapp.com",

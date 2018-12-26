@@ -18,6 +18,7 @@ class Layout extends Component {
             hasEvents: false,
             loading: false
         })
+        this.setEvents = this.setEvents.bind(this);
     }
     
     toggleSideBar = () => {
@@ -77,7 +78,7 @@ class Layout extends Component {
         if(this.state.index < 0){
             dash = <p>Please select a group to get started!</p>;
         }else if(!(this.state.hasEvents)){
-            dash = <Dashboard group={this.state.group} groupId={this.state.id} hasEvents={false}>There are no events planned for this group yet. Go ahead and add one!</Dashboard>
+            dash = <Dashboard group={this.state.group} groupId={this.state.id} hasEvents={false} refresh={this.setEvents}>There are no events planned for this group yet. Go ahead and add one!</Dashboard>
         }else if(this.state.loading){
             dash = <Spinner/>
         }

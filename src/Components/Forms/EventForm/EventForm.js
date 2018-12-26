@@ -33,7 +33,6 @@ class EventForm extends Component {
             id: eventsRef.push().key
         };
 
-        
         this.props.add(newEvent);
         // eventsRef.push(newEvent);
     }

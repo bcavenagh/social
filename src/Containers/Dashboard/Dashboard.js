@@ -40,6 +40,7 @@ class Dashboard extends Component {
         this.setState(previousState => ({
             events: [...previousState.events, event]
         }));
+        this.props.refresh(event.groupid);
         this.handleClose();
     };
 

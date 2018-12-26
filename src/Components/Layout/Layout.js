@@ -16,9 +16,11 @@ class Layout extends Component {
             index:-1,
             events:[],
             hasEvents: false,
-            loading: false
+            loading: false,
+            removeGroup: ''
         })
         this.setEvents = this.setEvents.bind(this);
+        this.child = React.createRef();
     }
     
     toggleSideBar = () => {
@@ -51,25 +53,34 @@ class Layout extends Component {
             });
         }
     }
-
     fetchEvents(tempIdHold) {
         const eventsRef = fire.database().ref('events');
         const tempEventHold = [];
-        tempIdHold.forEach(event => {
-            eventsRef.child(event).once('value', snapshot => {
-                let newEvent = {
-                    name:snapshot.val().name,
-                    description:snapshot.val().description,
-                    groupid:this.props.group,
-                    id: eventsRef.push().key
-                };
-                tempEventHold.push(newEvent);    
-                this.setState({
-                    events: tempEventHold,
-                    loading:false
-                });                
-            }); 
-        });
+        if(tempIdHold.length > 0){
+            tempIdHold.forEach(event => {
+                eventsRef.child(event).once('value', snapshot => {
+                    if(snapshot.val() != null){
+                        let newEvent = {
+                            name:snapshot.val().name,
+                            description:snapshot.val().description,
+                            groupid:this.state.id,
+                            id: eventsRef.push().key
+                        };
+                        tempEventHold.push(newEvent);    
+                        this.setState({
+                            events: tempEventHold,
+                            loading:false
+                        }); 
+                    }               
+                }); 
+            });
+        }
+    }
+    handleRemoveGroup = (id) => {
+        this.setState({
+            removeGroup: id
+        })
+        this.child.current.removeGroup();
     }
     //REFRESH DASHBOARD
 
@@ -78,20 +89,34 @@ class Layout extends Component {
         if(this.state.index < 0){
             dash = <p>Please select a group to get started!</p>;
         }else if(!(this.state.hasEvents)){
-            dash = <Dashboard group={this.state.group} groupId={this.state.id} hasEvents={false} refresh={this.setEvents}>There are no events planned for this group yet. Go ahead and add one!</Dashboard>
+            dash = <Dashboard 
+                        group={this.state.group} 
+                        groupId={this.state.id} 
+                        hasEvents={false} 
+                        refresh={this.setEvents}
+                        handleRemoveGroup={this.handleRemoveGroup} >There are no events planned for this group yet. Go ahead and add one!</Dashboard>
         }else if(this.state.loading){
             dash = <Spinner/>
         }
         else{
-            dash = <Dashboard group={this.state.group} groupId={this.state.id} events={this.state.events} hasEvents={true} />
+            dash = <Dashboard 
+                        group={this.state.group} 
+                        groupId={this.state.id} 
+                        events={this.state.events} 
+                        hasEvents={true}
+                        refresh={this.setEvents}
+                        handleRemoveGroup={this.handleRemoveGroup} />
         }
             return(
                 <>
                     <TopBar toggle={this.toggleSideBar} isOpen={this.state.sidebar} />
                     <main className={classes.Main}>
                         <SideBar 
-                            show={this.state.sidebarOpen} 
-                            toggleGroup={this.toggleGroup}/>
+                            show={this.state.sidebarOpen}
+                            ref={this.child}
+                            groupId={this.state.id} 
+                            toggleGroup={this.toggleGroup}
+                            removeGroup={this.state.removeGroup}/>
                         {dash}
                     </main>
                 </>

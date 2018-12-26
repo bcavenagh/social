@@ -21,3 +21,9 @@
 .AppBar{
     margin-bottom: 20px;
 }
+.grow{
+    flex-grow: 1;
+}
+.MenuButtons{
+    margin:10px!important;
+}

@@ -22,7 +22,7 @@ class GroupForm extends Component {
         let alertString = "Group Name: " + this.state.groupName + "\n Group Description: " + this.state.groupDesc;
         group.preventDefault();
 
-        //Hadnling forming the group for Firebase
+        //Handling forming the group for Firebase
         const groupsRef = fire.database().ref('groups');
         console.log("Groups Ref:" + groupsRef)
         const groupId = groupsRef.push().key;

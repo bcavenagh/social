@@ -55,7 +55,6 @@ class SideBar extends Component {
         this.setState({ open: false });
     };
     handleSelectedIndex = (id) => {
-        
             this.setState({ selectedIndex: id });
             let group = this.state.groups[id];
             // console.log(group)
@@ -73,7 +72,12 @@ class SideBar extends Component {
         
         this.handleClose();
     };
-    
+    removeGroup(){
+        console.log("Were in")
+        const dbref = fire.database().ref('groups').child(this.props.groupId);
+        dbref.remove();
+        this.setGroups();
+    }
     render(){
         let sideBarClasses;
         if(this.props.show){

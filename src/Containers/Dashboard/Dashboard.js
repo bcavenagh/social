@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import classes from './Dashboard.module.css';
 import Events from '../../Components/UI/Events/Events';
-import { Button, Tooltip, AppBar, Toolbar, Typography, Modal, IconButton, Menu, MenuItem } from '@material-ui/core';
+import { Button, Fab, Tooltip, AppBar, Toolbar, Typography, Modal, IconButton, Menu } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import Close from '@material-ui/icons/Close';
 import EventForm from '../../Components/Forms/EventForm/EventForm';
 import fire from 'firebase';
 import Settings from '@material-ui/icons/Settings';
+import SettingsModal from '../../Components/Forms/SettingsModal/SettingsModal';
 
 class Dashboard extends Component {
     constructor(props){
@@ -18,8 +20,18 @@ class Dashboard extends Component {
                 ],
                 openEventForm: false,
                 openSettings: false,
+                openEventDetails: false,
                 groupid: '',
+                eventDetails: null
             }
+    }
+    closeModals = () => {
+        this.setState({
+            openEventForm: false,
+            openSettings: false,
+            openEventDetails: false,
+            eventDetails: null
+        })
     }
     openEventForm = () => {
         this.setState({ openEventForm: true });
@@ -33,7 +45,6 @@ class Dashboard extends Component {
     closeSettings = () => {
         this.setState({ openSettings: false });
     }
-    
     handleEventAdd = (event) => {
         fire.database().ref('events').child(event.id).set({
             name: event.name,
@@ -61,7 +72,18 @@ class Dashboard extends Component {
         this.deleteGroup();
     }
     deleteGroup = () => {
-        this.props.handleRemoveGroup(this.props.groupId)
+        this.props.handleRemoveGroup(this.props.groupId);
+        // this.setState({events:[]})
+    }
+    handleEventOpen = (event) => {
+        this.setState({ openEventDetails: true, eventDetails: event });
+    }
+    handleRemoveEvent = (event) => {
+        const groupsRef = fire.database().ref('groups').child(this.props.groupId).child('events').child(event.id);
+        const eventsRef = fire.database().ref('events').child(event.id); 
+        groupsRef.remove();
+        eventsRef.remove();
+        this.props.refresh(this.props.groupId);
     }
     render(){
         var today = new Date();
@@ -77,12 +99,20 @@ class Dashboard extends Component {
         today = yyyy + '-' + mm + '-' + dd;
         let content = "";
         if(this.props.hasEvents){
-            content = <Events events={this.props.events} group={this.props.group}/>; 
+            content = <Events 
+                        events={this.props.events} 
+                        group={this.props.group}
+                        openEvent={this.handleEventOpen}/>; 
         }else{
             content = this.props.children;
         }
-        const { auth, anchorEl } = this.state;
+        const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
+
+        let detailsModal = null;
+        if(this.state.eventDetails != null){
+            detailsModal = <SettingsModal event={this.state.eventDetails} id={this.state.eventDetails.id} delete={this.handleRemoveEvent}/>
+        }
         return( 
 
             <div className={classes.Dashboard}>
@@ -101,19 +131,30 @@ class Dashboard extends Component {
                 {content}
 
                 <Tooltip title="Add Event" placement="bottom">
-                    <Button variant="fab" color="primary" onClick={this.openEventForm} aria-label="Add" className={classes.AddEventButton}>
+                    <Fab color="primary" onClick={this.openEventForm} aria-label="Add" className={classes.AddEventButton}>
                         <AddIcon />
-                    </Button>
+                    </Fab>
                 </Tooltip>
 
                 <Modal
                     aria-labelledby="simple-modal-title"
                     aria-describedby="simple-modal-description"
                     open={this.state.openEventForm}
-                    onClose={this.closeEventForm}
+                    onClose={this.closeModals}
                 >
                     <EventForm date={today} add={this.handleEventAdd} group={this.props.groupId}/>
                 </Modal>
+
+                {/* EVENT DETAILS MODAL */}
+                <Modal
+                    aria-labelledby="simple-modal-title"
+                    aria-describedby="simple-modal-description"
+                    open={this.state.openEventDetails}
+                    onClose={this.closeModals}
+                >
+                    {detailsModal}
+                </Modal>
+
                 <Menu
                     id="menu-appbar"
                     anchorEl={anchorEl}
@@ -126,10 +167,10 @@ class Dashboard extends Component {
                         horizontal: 'right',
                     }}
                     open={open}
-                    onClose={this.handleMenuClose}
+                    onClose={this.closeModals}
                     >
                         <Button 
-                            variant="outline" 
+                            variant="outlined" 
                             onClick={this.handleMenuClose} 
                             className={classes.MenuButtons}>Add Members</Button>
                         <Button 
@@ -137,6 +178,7 @@ class Dashboard extends Component {
                             color="secondary" 
                             onClick={this.handleLeaveGroup} 
                             className={classes.MenuButtons}>Leave Group</Button>
+                        <Button onClick={this.handleMenuClose}><Close/></Button>
                 </Menu>
             </div>
          );

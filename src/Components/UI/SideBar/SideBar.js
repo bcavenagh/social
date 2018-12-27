@@ -4,7 +4,6 @@ import Groups from './Groups/Groups';
 import { Button, Modal } from '@material-ui/core';
 import '../UI.css';
 import GroupForm from '../../Forms/GroupForm/GroupForm';
-import axios from '../../../axios';
 import fire from '../../../firebase';
 
 class SideBar extends Component {
@@ -20,8 +19,6 @@ class SideBar extends Component {
     }
     componentDidMount(){        
         this.setGroups();
-        // this.props.toggleGroup('1', 1, 'asjhdbvfasdv')
-        // this.props.toggleGroup(this.state.groups[this.state.selectedIndex].name)
     }
     setGroups(){
         const groupRef = fire.database().ref('groups');
@@ -57,7 +54,6 @@ class SideBar extends Component {
     handleSelectedIndex = (id) => {
             this.setState({ selectedIndex: id });
             let group = this.state.groups[id];
-            // console.log(group)
             this.props.toggleGroup(group.name, group.index, group.id);
         
     };
@@ -73,10 +69,22 @@ class SideBar extends Component {
         this.handleClose();
     };
     removeGroup(){
-        console.log("Were in")
         const dbref = fire.database().ref('groups').child(this.props.groupId);
         dbref.remove();
         this.setGroups();
+        this.deleteAllEvents(dbref);
+    }
+    deleteAllEvents(dbref){
+        // let tempIdHold = [];
+        const eventsRef = fire.database().ref('events');
+        dbref.child('events').once('value', snap => {
+            if(snap.val()){
+                snap.forEach(snap => {
+                    dbref.child('events').child(snap.key).remove();
+                    eventsRef.child(snap.key).remove();
+                });
+            }
+        })
     }
     render(){
         let sideBarClasses;

@@ -64,9 +64,9 @@ class Layout extends Component {
                             name:snapshot.val().name,
                             description:snapshot.val().description,
                             groupid:this.state.id,
-                            id: eventsRef.push().key
+                            id: snapshot.key
                         };
-                        tempEventHold.push(newEvent);    
+                        tempEventHold.push(newEvent);   
                         this.setState({
                             events: tempEventHold,
                             loading:false
@@ -78,10 +78,12 @@ class Layout extends Component {
     }
     handleRemoveGroup = (id) => {
         this.setState({
-            removeGroup: id
+            removeGroup: id,
+            index: -1
         })
         this.child.current.removeGroup();
     }
+    
     //REFRESH DASHBOARD
 
     render(){

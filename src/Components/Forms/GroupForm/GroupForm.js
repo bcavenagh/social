@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Paper, Input, TextField, Button } from '@material-ui/core';
+import { Paper, TextField, Button } from '@material-ui/core';
 import classes from './GroupForm.module.css';
 import fire from '../../../firebase';
 class GroupForm extends Component {
@@ -19,7 +19,7 @@ class GroupForm extends Component {
     }
 
     handleSubmit(group) {
-        let alertString = "Group Name: " + this.state.groupName + "\n Group Description: " + this.state.groupDesc;
+        // let alertString = "Group Name: " + this.state.groupName + "\n Group Description: " + this.state.groupDesc;
         group.preventDefault();
 
         //Handling forming the group for Firebase

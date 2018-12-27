@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Group from './Group/Group';
-import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
-import InboxIcon from '@material-ui/icons/Inbox';
+import { List } from '@material-ui/core';
 import classes from './Groups.module.css';
 
 const groups = (props) => (

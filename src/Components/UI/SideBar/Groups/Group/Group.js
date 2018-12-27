@@ -1,7 +1,6 @@
 import React from 'react';
 import classes from './Group.module.css';
-import { List, ListItem, ListItemIcon, ListItemText, Divider } from '@material-ui/core';
-import InboxIcon from '@material-ui/icons/Inbox';
+import { ListItem, ListItemText, Divider } from '@material-ui/core';
 
 const group = (props) => {
     let index = props.index

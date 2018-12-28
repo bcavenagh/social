@@ -111,7 +111,12 @@ class Dashboard extends Component {
 
         let detailsModal = null;
         if(this.state.eventDetails != null){
-            detailsModal = <SettingsModal event={this.state.eventDetails} id={this.state.eventDetails.id} delete={this.handleRemoveEvent}/>
+            detailsModal = 
+            <SettingsModal 
+                event={this.state.eventDetails} 
+                groupid={this.props.groupId} 
+                delete={this.handleRemoveEvent} 
+                refresh={this.props.refresh}/>
         }
         return( 
 

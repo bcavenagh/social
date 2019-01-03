@@ -3,6 +3,7 @@ import { Paper, TextField, Button } from '@material-ui/core';
 import classes from './EventForm.module.css';
 import firebase from '../../../firebase';
 import fire from '../../../firebase';
+import ColorToggle from '../../UI/ColorToggle/ColorToggle';
 
 class EventForm extends Component {
     constructor(props){
@@ -10,7 +11,15 @@ class EventForm extends Component {
         this.state = {
             eventName: '',
             eventDate: this.props.date,
-            eventDesc: ''
+            eventDesc: '',
+            eventColorHex:'',
+            colorToggleHexes: [
+                {color: 'Salmon', hex: '#FF5733'},
+                {color: 'Mint', hex: '#07E796'},
+                {color: 'Brass', hex: '#E79007'},
+                {color: 'Royal', hex: '#7117C7'}
+            ],
+            selectedColor:0
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -21,14 +30,23 @@ class EventForm extends Component {
         this.setState({[name]: event.target.value,});
     }
 
+    handleColorHex = (hex, index) => {
+        this.setState({
+            eventColorHex: hex,
+            selectedColor: index
+        });
+    }
+
     handleSubmit(event) {
         event.preventDefault();
 
         const eventsRef = firebase.database().ref('events');
-
+        console.log(this.state.eventColorHex);
         const newEvent = {
             name:this.state.eventName,
             description:this.state.eventDesc,
+            date:this.state.eventDate,
+            colorHex: this.state.eventColorHex,
             groupid:this.props.group,
             id: eventsRef.push().key,
             postedBy: fire.auth().currentUser.uid
@@ -73,7 +91,7 @@ class EventForm extends Component {
                         margin="normal"
                         variant="outlined"
                     />
-                    <p>{this.props.group}</p>
+                    <ColorToggle change={this.handleColorHex} colors={this.state.colorToggleHexes} selected={this.state.selectedColor}/>
                 </div>
                 <Button type="submit" value="Submit" className={classes.Submit}>
                     Submit

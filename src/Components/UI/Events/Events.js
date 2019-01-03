@@ -11,11 +11,14 @@ const events = (props) => (
                     <Event 
                         name={event.name} 
                         description={event.description} 
+                        date={event.date}
+                        colorHex={event.colorHex}
                         id={event.groupid} 
                         key={event.groupid}
                         open={props.openEvent}
                         eventId={event.id}
-                        event={event} />
+                        event={event}
+                         />
 
                 </Grid>
             )}

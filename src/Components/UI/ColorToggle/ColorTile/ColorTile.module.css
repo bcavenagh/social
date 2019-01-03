@@ -1,0 +1,15 @@
+.Tile{
+    height:50px;
+    width:50px;
+    border-radius: 10px;
+}
+.Tile:hover{
+    border:4px solid #07A6E7;
+    cursor: pointer;
+}
+.ColorName{
+    text-align: center;
+}
+.selected{
+    border:4px solid #46d06c;
+}

@@ -14,35 +14,46 @@ class SideBar extends Component {
                 // {name:'Group 1', id: 0},
             ],
             open: false,
-            selectedIndex: -1
+            selectedIndex: -1,
+            hasGroups: false
         };
     }
     componentDidMount(){        
         this.setGroups();
     }
     setGroups(){
+        const user = fire.auth().currentUser.uid;
+        const currentUserRef = fire.database().ref('users').child(user);
         const groupRef = fire.database().ref('groups');
-        //USE THE SETGROUPS FUNCTION FROM MY MACBOOK FRIEND-GROUP-REACT TO REPLACE BELOW
-        //{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}
+        const userGroups = currentUserRef.child('groups');
         const groupArray = [];
         const idArray = [];
-        groupRef.once('value', snapshot => {
-            snapshot.forEach(group => {
-                idArray.push(group.key);
-                let addGroup = {
-                    id: group.key,
-                    name: group.val().name
-                }
-                if(groupArray.length !== idArray.length){
-                    groupArray.push(addGroup);
-                }
-            })
-            // this.props.toggleGroup(groupArray[0].name, 0, groupArray[0].id )
+        userGroups.once('value', snapshot => {
+            if(snapshot.val()){
+                snapshot.forEach(group => {
+                    idArray.push(group.key);
+                });
+                idArray.forEach(function(group, i) {
+                    groupRef.child(group).once('value', snap => {
+                        let addGroup = {
+                            id: snap.key,
+                            name: snap.val().name
+                        }
+                        if(groupArray.length !== idArray.length){
+                            groupArray.push(addGroup);
+                        }
+                    })
+                })
+            }
+        });
+        this.setState(previousState => ({
+            groups: groupArray,
+        }), () => {
+            this.props.togg();
             this.setState(previousState => ({
-                groups: groupArray
-            }));
-        })
-        //{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}
+                hasGroups: true
+            }))
+        });
     }
     handleOpen = () => {
         this.setState({ open: true });
@@ -58,10 +69,21 @@ class SideBar extends Component {
         
     };
     handleEventAdd = (group) => {
+        const user = fire.auth().currentUser.uid;
+
         fire.database().ref('groups').child(group.id).set({
             name: group.name,
-            id: group.id
+            id: group.id,
+            // members: {
+            //     id: user
+            // }
         });
+        fire.database().ref('groups').child(group.id).child('members').child(user).set({
+            id: user
+        })
+        fire.database().ref('users').child(user).child('groups').child(group.id).set({
+            groupId: group.id
+        })
         this.setState(previousState => ({
             groups: [...previousState.groups, group]
         }));
@@ -88,12 +110,15 @@ class SideBar extends Component {
     }
     render(){
         let sideBarClasses;
+        
         if(this.props.show){
             sideBarClasses = [classes.SideBar, classes.Open].join(' ');
         }else{
             sideBarClasses = [classes.SideBar]
         }
-        return(
+        let groupsRender = null;
+        if(this.state.groups.length > 0){
+            groupsRender = 
             <div className={sideBarClasses}>
                 <div className={classes.Groups}> 
                     <Groups 
@@ -115,6 +140,29 @@ class SideBar extends Component {
                     <GroupForm add={this.handleEventAdd} groupCount={this.state.groups.length}/>
                 </Modal>
             </div>
+        }else{
+            groupsRender = 
+            <div className={sideBarClasses}>
+                <div className={classes.Groups}> 
+                    <p>There are no groups. Create one to get started!</p>
+                </div>
+                <div className={classes.CreateGroupButton}>
+                    <Button color="primary" variant="contained" className={classes.Button} onClick={this.handleOpen}>
+                        <h6 className={classes.ButtonText}>Create Group</h6>
+                    </Button>
+                </div>
+                <Modal
+                    aria-labelledby="simple-modal-title"
+                    aria-describedby="simple-modal-description"
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                >
+                    <GroupForm add={this.handleEventAdd} groupCount={this.state.groups.length}/>
+                </Modal>
+            </div>
+        }
+        return(
+            <>{groupsRender}</>
         );
     }
 }

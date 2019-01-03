@@ -24,6 +24,7 @@ class Dashboard extends Component {
                 groupid: '',
                 eventDetails: null
             }
+            this.findUsersMatchingEmail = this.findUsersMatchingEmail.bind(this);
     }
     closeModals = () => {
         this.setState({
@@ -50,7 +51,8 @@ class Dashboard extends Component {
             name: event.name,
             description: event.description,
             groupid: event.groupid,
-            id: event.id
+            id: event.id,
+            postedBy: event.postedBy
         });
         fire.database().ref('groups').child(event.groupid).child('events').child(event.id).set({
             id:event.id
@@ -73,7 +75,6 @@ class Dashboard extends Component {
     }
     deleteGroup = () => {
         this.props.handleRemoveGroup(this.props.groupId);
-        // this.setState({events:[]})
     }
     handleEventOpen = (event) => {
         this.setState({ openEventDetails: true, eventDetails: event });
@@ -85,6 +86,52 @@ class Dashboard extends Component {
         eventsRef.remove();
         this.props.refresh(this.props.groupId);
     }
+    handleAddMember = () => {
+        var email = prompt("Enter the person's email and press submit");
+        if (email != null) {    
+            this.findUsersMatchingEmail(email, this.props.groupId);
+            this.handleMenuClose();
+            this.props.refresh(this.props.groupId);
+        }
+        
+    }
+    /**
+     * @param {string} emailAddress
+     * @return {Object} the object contains zero or more user records, the keys are the users' ids
+     */
+    findUsersMatchingEmail( emailAddress, groupId ) {
+        let userRef = fire.database().ref('users');
+        let membersRef = fire.database().ref('groups').child(this.props.groupId).child('members');
+        userRef.orderByChild('email').equalTo(emailAddress).once('value', function(snap) {
+            if(snap.val()){
+                snap.forEach(user => {
+                    console.log(user.key);
+                    membersRef.child(user.key).set({
+                        id: user.key
+                    })
+                    userRef.child(user.key).child('groups').child(groupId).set({
+                        groupId: groupId
+                    })
+                })
+            }else{
+                alert(emailAddress + ' does not exist :(');
+            }
+        });
+        
+    }
+    // findUsersMatchingUsername( username ) {
+    //     let userRef = fire.database().ref('users');
+    //     userRef.orderByChild('username').equalTo(username).once('value', snap => {
+    //         if(snap.val()){
+    //             snap.forEach(user => {
+    //                 console.log(user.key);
+    //             })
+    //         }else{
+    //             alert(username + ' exists?: false');
+    //         }
+    //     });
+    // }
+
     render(){
         var today = new Date();
         var dd = today.getDate();
@@ -126,7 +173,9 @@ class Dashboard extends Component {
                         <Typography variant="h3" color="inherit" className={classes.grow}>
                             {this.props.group}
                         </Typography>
-                        <p>{this.props.groupId}</p>
+                        <p>
+                            Members: {this.props.members.length}
+                        </p>
                         <IconButton color="inherit" onClick={this.handleMenuOpen}>
                             <Settings/>
                         </IconButton>
@@ -176,7 +225,7 @@ class Dashboard extends Component {
                     >
                         <Button 
                             variant="outlined" 
-                            onClick={this.handleMenuClose} 
+                            onClick={this.handleAddMember} 
                             className={classes.MenuButtons}>Add Members</Button>
                         <Button 
                             variant="contained" 

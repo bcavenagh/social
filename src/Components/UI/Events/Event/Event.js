@@ -24,9 +24,6 @@ const event = (props) => (
           <Typography component="p">
             {props.description}
           </Typography>
-          <Typography component="h4">
-            {props.eventId}
-          </Typography>
         </CardContent>
       </CardActionArea>
       {/* <CardActions>

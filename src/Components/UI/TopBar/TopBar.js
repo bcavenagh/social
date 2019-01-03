@@ -59,7 +59,7 @@ class TopBar extends Component{
                         onClose={this.handleProfileClose}
                         >
                             <MenuItem onClick={this.handleProfileClose}>Profile</MenuItem>
-                            <MenuItem onClick={this.handleProfileClose}>Logout</MenuItem>
+                            <MenuItem onClick={this.props.logout}>Logout</MenuItem>
                         </Menu>
                     </div>
                 )}

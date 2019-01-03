@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Paper, TextField, Button } from '@material-ui/core';
 import classes from './EventForm.module.css';
 import firebase from '../../../firebase';
+import fire from '../../../firebase';
 
 class EventForm extends Component {
     constructor(props){
@@ -29,7 +30,8 @@ class EventForm extends Component {
             name:this.state.eventName,
             description:this.state.eventDesc,
             groupid:this.props.group,
-            id: eventsRef.push().key
+            id: eventsRef.push().key,
+            postedBy: fire.auth().currentUser.uid
         };
 
         this.props.add(newEvent);

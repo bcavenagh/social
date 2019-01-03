@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa');
+.loginContainer{
+   background: #87d3ff;
+   height:100vh;
+   width:100vw;
+}
+.loginGrid{
+   text-align: center;
+}
+.loginInput{
+   margin-bottom:25px;
+}
+.loginPaper{
+   padding:20px 50px;
+}
+.loginButton{
+   margin: 0px 10px 0px;
+}
+.welcomeText{
+   font-family: 'Comfortaa';
+   margin-bottom: 20px !important;
+}
+

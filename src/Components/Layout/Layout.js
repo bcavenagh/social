@@ -15,12 +15,19 @@ class Layout extends Component {
             id:'',
             index:-1,
             events:[],
+            groups:[],
+            members: [],
             hasEvents: false,
+            hasGroups: false,
             loading: false,
-            removeGroup: ''
+            removeGroup: '',
+            userId: fire.auth().currentUser.uid
         })
         this.setEvents = this.setEvents.bind(this);
+        this.setGroups = this.setGroups.bind(this);
+        this.fetchGroups = this.fetchGroups.bind(this);
         this.child = React.createRef();
+         
     }
     
     toggleSideBar = () => {
@@ -29,19 +36,38 @@ class Layout extends Component {
         });
     }
     toggleGroup = (name, index, id) => {
+        let membersHold = [];
+        const groupRef = fire.database().ref('groups').child(id);
+        groupRef.child('members').once('value', snap => {
+            if(snap.val()){
+                snap.forEach(member => {
+                    membersHold.push(snap.key);
+                })
+            }
+        })
         this.setState({
             group: name,
             index: index,
-            id: id
-        })
-        this.setEvents(id);
+            id: id,
+            members: membersHold
+        }, () => {this.setEvents(id);})
+        
     }
     setEvents(id){
         this.setState({loading: true});
         let tempIdHold = [];
+        let members = [];
         if(id != null){
-            const groupRef = fire.database().ref('groups').child(id).child('events');
-            groupRef.once('value', snapshot =>{
+            const groupRef = fire.database().ref('groups').child(id);
+            groupRef.child('members').once('value', snap => {
+                if(snap.val()){
+                    snap.forEach(member => {
+                        members.push(member);
+                    });
+                    this.setState({members: members}, () => {this.fetchEvents(tempIdHold);});
+                }
+            })
+            groupRef.child('events').once('value', snapshot =>{
                 if(snapshot.val()){
                     snapshot.forEach(snap => {
                         tempIdHold.push(snap.key);
@@ -51,6 +77,7 @@ class Layout extends Component {
                     this.setState({hasEvents: false});
                 }
             });
+            
         }
     }
     fetchEvents(tempIdHold) {
@@ -76,14 +103,65 @@ class Layout extends Component {
             });
         }
     }
+    setGroups = () => {
+        this.setState({loading: true});
+
+        const user = fire.auth().currentUser.uid;
+        const currentUserRef = fire.database().ref('users').child(user);
+        const userGroups = currentUserRef.child('groups');
+        const idArray = [];
+        userGroups.once('value', snapshot => {
+            if(snapshot.val()){
+                snapshot.forEach(group => {
+                    idArray.push(group.key);
+                });
+                this.setState({hasGroups: true}, () => {this.fetchGroups(idArray);})
+            }else{
+                this.setState({hasGroups: false});
+            }
+        });
+    }
+    fetchGroups(idArray){
+        const groupRef = fire.database().ref('groups');
+        const groupArray = [];
+        if(idArray.length > 0){
+            idArray.forEach(group => {
+                groupRef.child(group).once('value', snap => {
+                    if(snap.val() != null){
+                        let addGroup = {
+                            id: snap.key,
+                            name: snap.val().name
+                        }
+                        groupArray.push(addGroup);
+                        this.setState({
+                            groups: groupArray,
+                            loading:false
+                        });
+                    }
+                })
+                
+            })
+        }
+    }
     handleRemoveGroup = (id) => {
         this.setState({
             removeGroup: id,
             index: -1
         })
         this.child.current.removeGroup();
+        const user = fire.auth().currentUser.uid;
+        const userDb = fire.database().ref('users').child(user).child('groups').child(id);
+        userDb.remove();
     }
-    
+    handleLogout(){
+        fire.auth().signOut()
+        .then(function() {
+            console.log('Signed out')
+        })
+        .catch(function(error) {
+            console.log('Error on signout')
+        });
+    }
     //REFRESH DASHBOARD
 
     render(){
@@ -94,6 +172,7 @@ class Layout extends Component {
             dash = <Dashboard 
                         group={this.state.group} 
                         groupId={this.state.id} 
+                        members={this.state.members}
                         hasEvents={false} 
                         refresh={this.setEvents}
                         handleRemoveGroup={this.handleRemoveGroup} >There are no events planned for this group yet. Go ahead and add one!</Dashboard>
@@ -105,20 +184,23 @@ class Layout extends Component {
                         group={this.state.group} 
                         groupId={this.state.id} 
                         events={this.state.events} 
+                        members={this.state.members}
                         hasEvents={true}
                         refresh={this.setEvents}
                         handleRemoveGroup={this.handleRemoveGroup} />
         }
             return(
                 <>
-                    <TopBar toggle={this.toggleSideBar} isOpen={this.state.sidebar} />
+                    <TopBar toggle={this.toggleSideBar} isOpen={this.state.sidebar} logout={this.handleLogout}/>
                     <main className={classes.Main}>
                         <SideBar 
                             show={this.state.sidebarOpen}
                             ref={this.child}
                             groupId={this.state.id} 
                             toggleGroup={this.toggleGroup}
-                            removeGroup={this.state.removeGroup}/>
+                            removeGroup={this.state.removeGroup}
+                            hasGroup={this.state.hasGroups}
+                            togg={this.setGroups}/>
                         {dash}
                     </main>
                 </>

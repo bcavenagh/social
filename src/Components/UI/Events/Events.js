@@ -13,6 +13,9 @@ const events = (props) => (
                         description={event.description} 
                         snippet={event.snippet}
                         date={event.date}
+                        day={event.day}
+                        month={event.month}
+                        year={event.year}
                         colorHex={event.colorHex}
                         id={event.groupid} 
                         key={event.groupid}
@@ -20,11 +23,14 @@ const events = (props) => (
                         eventId={event.id}
                         event={event}
                         />
-
                 </Grid>
             )}
         </Grid> 
     </div>
 );
+
+Event.defaultProps = {
+    colorHex: '',
+};
 
 export default events;

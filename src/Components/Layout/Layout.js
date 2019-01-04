@@ -80,6 +80,38 @@ class Layout extends Component {
             
         }
     }
+    getDay(date){return date.substring(8,10)}
+    getMonth(date){
+        switch(date.substring(5,7)){
+            case '01':
+                return "Jan";
+            case '02':
+                return "Feb";
+            case '03':
+                return "Mar";
+            case '04':
+                return "Apr";
+            case '05':
+                return "May";
+            case '06':
+                return "Jun";
+            case '07':
+                return "Jul"
+            case '08':
+                return "Aug";
+            case '09':
+                return "Sep";
+            case '10':
+                return "Oct";
+            case '11':
+                return "Nov";
+            case '12':
+                return "Dec";
+            default:
+                return "ERR";
+        }
+    }
+    getYear(date){return date.substring(0,4)}
     fetchEvents(tempIdHold) {
         const eventsRef = fire.database().ref('events');
         const tempEventHold = [];
@@ -92,6 +124,9 @@ class Layout extends Component {
                             description:snapshot.val().description,
                             snippet:snapshot.val().description.substring(0,10),
                             date: snapshot.val().date,
+                            day: this.getDay(snapshot.val().date),
+                            month: this.getMonth(snapshot.val().date),
+                            year: this.getYear(snapshot.val().date),
                             colorHex: snapshot.val().colorHex,
                             groupid:this.state.id,
                             id: snapshot.key
@@ -106,6 +141,7 @@ class Layout extends Component {
             });
         }
     }
+
     setGroups = () => {
         this.setState({loading: true});
 

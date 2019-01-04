@@ -7,10 +7,11 @@ const events = (props) => (
         
         <Grid container spacing={24}>
             {props.events.map((event, index) => 
-                <Grid item xs={12} sm={4} md={3} xl={2} key={index}>
+                <Grid item xs={12} sm={6} md={4} xl={3} key={index}>
                     <Event 
                         name={event.name} 
                         description={event.description} 
+                        snippet={event.snippet}
                         date={event.date}
                         colorHex={event.colorHex}
                         id={event.groupid} 
@@ -18,7 +19,7 @@ const events = (props) => (
                         open={props.openEvent}
                         eventId={event.id}
                         event={event}
-                         />
+                        />
 
                 </Grid>
             )}

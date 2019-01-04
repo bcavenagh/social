@@ -90,6 +90,7 @@ class Layout extends Component {
                         let newEvent = {
                             name:snapshot.val().name,
                             description:snapshot.val().description,
+                            snippet:snapshot.val().description.substring(0,10),
                             date: snapshot.val().date,
                             colorHex: snapshot.val().colorHex,
                             groupid:this.state.id,

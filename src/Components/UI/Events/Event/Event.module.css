@@ -1,6 +1,36 @@
 .Event{
-    background-color: goldenrod;
-    height:25%;
-    width:30%;
-    display:inline-block;
+    background-color: white;
+    border-radius:4px;
+    padding:15px;
+    box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12);
+}
+.Event:hover{
+    cursor: pointer;
+}
+.EventFlexBox{
+    display: flex;
+    justify-content: space-between;
+    margin: 75px 0 0 0;
+}
+.Salmon{
+    border-bottom:5px solid #FF5733;
+}
+.Mint{
+    border-bottom:5px solid #07E796;
+}
+.Brass{
+    border-bottom:5px solid #E79007;
+}
+.Royal{
+    border-bottom:5px solid #7117C7;
+}
+.Title{
+    margin: 0 !important;
+    text-transform: uppercase;
+}
+.Date{
+    margin: 0 !important;
+}
+.grow{
+    flex-grow: 1;
 }

@@ -19,7 +19,7 @@ class EventForm extends Component {
                 {color: 'Brass', hex: '#E79007'},
                 {color: 'Royal', hex: '#7117C7'}
             ],
-            selectedColor:0
+            selectedColor:-1
         };
 
         this.handleChange = this.handleChange.bind(this);

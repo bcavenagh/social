@@ -18,7 +18,7 @@ const events = (props) => (
                         year={event.year}
                         colorHex={event.colorHex}
                         id={event.groupid} 
-                        key={event.groupid}
+                        key={event.id}
                         open={props.openEvent}
                         eventId={event.id}
                         event={event}

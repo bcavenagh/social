@@ -1,23 +1,100 @@
 import React, { Component } from 'react';
 import classes from './Event.module.scss';
-// import Card from '@material-ui/core/Card';
-// import CardActionArea from '@material-ui/core/CardActionArea';
-// import CardContent from '@material-ui/core/CardContent';
-// import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
+import fire from '../../../../firebase';
+import Grade from '@material-ui/icons/Grade';
+import Done from '@material-ui/icons/Done';
+import Clear from '@material-ui/icons/Clear';
 
 class Event extends Component {
   constructor(props){
     super(props);
     this.state = {
-      
+      count: 0,
+      going: 0,
+      interested: 0,
+      out: 0
     };
   }
-  getNameFromHex(hex){
-      console.log(hex)
+  componentDidMount(){
+    const participantsRef = fire.database().ref('events').child(this.props.eventId).child('participants');
+    
+    participantsRef.once('value', snap => {
+      console.log(snap);
+      let countGoing = 0;
+      let countInterested = 0;
+      let countOut = 0;
+      snap.forEach((participant) => {
+        console.log(participant);
+        switch(participant.val()){
+          case 'Going':
+            countGoing++;
+            this.setState((prevState, props) => {return{going: prevState.going + 1}});
+            break;
+          case 'Interested':
+            countInterested++;
+            this.setState((prevState, props) => {return{interested: prevState.interested + 1}});
+            break;
+          case 'Out':
+            countOut++;
+            this.setState((prevState, props) => {return{out: prevState.out + 1}});
+            break;
+          default: return;
+        }
+        console.log(participant.val() + "Going: " + countGoing + " -- Interested: " + countInterested + " -- Out: " + countOut);
+      })
+      // counter++;
+      // this.setState({
+      //   count: this.state.count + 1
+      // })
+      // console.log(counter)
+    })
   }
 
+  handleRSVP(choice){
+    console.log(choice);
+    const eventsRef = fire.database().ref('events').child(this.props.eventId);
+    const user = fire.auth().currentUser.uid;
+    // if(eventsRef.hasChild('participants')){
+    //   eventsRef.child('participants').push(user);
+    // }
+    eventsRef.child('participants').child(user).set(choice);
+    
+    const participantsRef = fire.database().ref('events').child(this.props.eventId).child('participants');
+    
+    participantsRef.once('value', snap => {
+      console.log(snap);
+      let countGoing = 0;
+      let countInterested = 0;
+      let countOut = 0;
+      snap.forEach((participant) => {
+        console.log(participant);
+        switch(participant.val()){
+          case 'Going':
+            countGoing++;
+            // this.setState((prevState, props) => {return{going: prevState.going + 1}});
+            break;
+          case 'Interested':
+            countInterested++;
+            // this.setState((prevState, props) => {return{interested: prevState.interested + 1}});
+            break;
+          case 'Out':
+            countOut++;
+            // this.setState((prevState, props) => {return{out: prevState.out + 1}});
+            break;
+          default: return;
+        }
+        console.log(participant.val() + "Going: " + countGoing + " -- Interested: " + countInterested + " -- Out: " + countOut);
+        this.setState({
+          going: countGoing,
+          interested: countInterested,
+          out: countOut
+        });
+      })
+    })
+
+  }
   render(){
     // const { classes } = this.props;
     return(
@@ -35,49 +112,45 @@ class Event extends Component {
                 [classes.Default]: this.props.colorHex === '',
               }
           )}>
-            <span className={classes.day}>{this.props.day}</span>
+            <span className={classes.day}>{this.props.day}</span> 
             <span className={classes.month}>{this.props.month}</span>
             <span className={classes.year}>{this.props.year}</span>
           </div>
           <div className={classes.data}>
             <div className={classes.content}>
               {/* <span className={classes.author}>Jane Doe</span> */}
-              <h1 className={classes.title}><a onClick={(e) => this.props.open(this.props.event)}>{this.props.name}</a></h1>
+              <h1 className={classes.title} >{this.props.name}</h1>
               <p className={classes.text}>{this.props.description}</p>
-              {/* <label htmlFor="show-menu" className={classes.menubutton}><span></span></label> */}
+              <label className={classes.menubutton} onClick={(e) => this.props.open(this.props.event)}><span></span></label>
             </div>
             {/* <input type="checkbox" id={classes.showmenu} /> */}
             <ul className={classes.menucontent}>
-              <li><a href="#" className="fa fa-bookmark-o"></a></li>
-              <li><a href="#" className="fa fa-heart-o"><span>47</span></a></li>
-              <li><a href="#" className="fa fa-comment-o"><span>8</span></a></li>
+              <li>
+                <div className={classNames(classes.Button, classes.NotGoing)}  onClick={(e) => this.handleRSVP('Out')}>
+                  <span >{this.state.out}</span>
+                  <Clear/>
+                  <p className={classes.Label}>Out</p>
+                </div>
+              </li>
+              <li>
+                <div className={classNames(classes.Button, classes.Interested)}  onClick={(e) => this.handleRSVP('Interested')}>
+                  <span>{this.state.interested}</span>
+                  <Grade/>
+                  <p className={classes.Label}>Interested</p>
+                </div>
+              </li>
+              <li>
+                <div className={classNames(classes.Button, classes.Going)} onClick={(e) => this.handleRSVP('Going')}>
+                  <span>{this.state.going}</span>
+                  <Done/>
+                  <p className={classes.Label}>Going</p>
+                </div>
+              </li>
             </ul>
           </div>
         </div>
       </div>
     </div>
-
-
-    // <div className={
-    //   classNames(
-    //     classes.Event,
-    //     {
-    //       [classes.Salmon]: this.props.colorHex === '#FF5733', 
-    //       [classes.Mint]: this.props.colorHex === '#07E796',
-    //       [classes.Brass]: this.props.colorHex === '#E79007', 
-    //       [classes.Royal]: this.props.colorHex === '#7117C7'
-    //     }
-        
-    //     )} onClick={(e) => this.props.open(this.props.event)}>
-    //     <div className={classes.EventVitals}>
-    //       <h5 className={classNames(classes.grow, classes.Title)}>{this.props.name}</h5>
-    //       <p className={classes.Date}>{this.props.date}</p>
-    //     </div>
-    //     <div className={classes.EventExtras} onClick={(e) => this.props.open(this.props.event)}>
-    //       <p>{this.props.snippet}</p>
-    //       <p>{this.props.date}</p>
-    //     </div>
-    // </div>
     )}
   }
 

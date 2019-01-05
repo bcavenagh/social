@@ -72,8 +72,14 @@
 $regal-blue: #034378;
 $san-juan: #2d4e68;
 $bermuda: #77d7b9;
+$salmon: #FF5733;
+$mint: #07E796;
+$brass: #E79007; 
+$lavendar: #7117C7;
+$gray: #8e8e8e;
 $white: #fff;
 $black: #000;
+
 $open-sans: 'Open Sans',
 sans-serif;
 // clear-fix mixin
@@ -103,6 +109,9 @@ body {
 a {
   text-decoration: none;
 }
+.Button {
+  text-decoration: none;
+}
 
 h1 {
   font-family: $open-sans;
@@ -117,7 +126,7 @@ h1 {
 // Base styles
 .card {
   float: left;
-  padding: 0 1.7rem;
+  padding: 0;
   width: 100%;
   .menucontent {
     @include cf;
@@ -130,11 +139,14 @@ h1 {
     a {
       color: $white;
     }
+    .Button {
+      color: $white;
+    }
     span {
       position: absolute;
       left: 50%;
-      top: 0;
-      font-size: 10px;
+      top: 3%;
+      font-size: 12px;
       font-weight: 700;
       font-family: 'Open Sans';
       transform: translate(-50%, 0);
@@ -146,6 +158,7 @@ h1 {
     position: relative;
     overflow: hidden;
     box-shadow: 0 19px 38px rgba($black, 0.3), 0 15px 12px rgba($black, 0.2);
+    
     &:hover {
       .data {
         transform: translateY(0);
@@ -187,7 +200,7 @@ h1 {
 
 // First example styles
   .wrapper {
-    background: url(https://images.unsplash.com/photo-1496979551903-46e46589a88b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=cda12b505afa1beb06e49d89014cbd65&auto=format&fit=crop&w=634&q=80) 20% 1% / cover no-repeat;
+    background: url('https://wallpapershome.com/images/pages/pic_v/667.jpg') 20% 1% / cover no-repeat;
   }
   .date {
     position: absolute;
@@ -221,11 +234,14 @@ h1 {
     a {
       color: lighten($black, 50%);
     }
+    .Button{
+      color: lighten($black, 50%);
+    }
   }
   .menubutton {
     position: absolute;
     z-index: 999;
-    top: 16px;
+    top: 8px;
     right: 16px;
     width: 25px;
     text-align: center;
@@ -268,25 +284,53 @@ h1 {
     li {
       width: 33.333333%;
       float: left;
-      background-color: $bermuda;
+      background-color: $gray;
       height: 60px;
       position: relative;
     }
+    .NotGoing:hover{background-color: $salmon; cursor: pointer;}
+    .Interested:hover{background-color: $brass; cursor: pointer;}
+    .Going:hover{background-color: $bermuda; cursor: pointer;}
     a {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       font-size: 24px;
+      height:100%;
+      width:100%;
+    }
+    .Button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      height:100%;
+      width:100%;
     }
     span {
       top: -10px;
     }
+    svg{
+      position: absolute;
+      top:50%;
+      left:50%;
+      transform: translate(-50%,-50%)
+    }
+    .Label{
+      font-size: 12px;
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translate(-50%,0%);
+
+    }
   }
 
-.Salmon{background-color: #FF5733;} 
-.Mint {background-color: #07E796;}
-.Brass{background-color: #E79007;} 
-.Lavendar{background-color:#7117C7;}
-.Royal{background-color:#034378;}
-.Default{background-color: black;}
+.Salmon{background-color: $salmon;} 
+.Mint {background-color: $mint;}
+.Brass{background-color: $brass;} 
+.Lavendar{background-color: $lavendar;}
+.Royal{background-color: $regal-blue;}
+.Default{background-color: $black;}

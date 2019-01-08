@@ -56,7 +56,7 @@ class Login extends Component {
                         justify="center"
                         style={{ minHeight: '100vh' }}>
                     <Grid item xs={6}>
-                        <Typography variant="h4" className={classes.welcomeText}>Welcome!</Typography>
+                        <h3 className={classes.welcomeText}>Welcome!</h3>
                         <Paper className={classes.loginPaper}>
                             <form>
                                 <div>

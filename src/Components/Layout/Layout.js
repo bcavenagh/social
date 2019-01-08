@@ -27,7 +27,6 @@ class Layout extends Component {
         this.setGroups = this.setGroups.bind(this);
         this.fetchGroups = this.fetchGroups.bind(this);
         this.child = React.createRef();
-         
     }
     
     toggleSideBar = () => {

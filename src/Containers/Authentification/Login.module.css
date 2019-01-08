@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Comfortaa');
 .loginContainer{
-   background: #87d3ff;
+   background: url('https://source.unsplash.com/daily') center center;
+   background-size: cover;
    height:100vh;
    width:100vw;
 }
 .loginGrid{
    text-align: center;
+   background: rgba(0,0,0,0.5);
 }
 .loginInput{
    margin-bottom:25px;
@@ -19,5 +21,12 @@
 .welcomeText{
    font-family: 'Comfortaa';
    margin-bottom: 20px !important;
+   color: white;
+   font-size: 40px;
+   font-weight: bold;
+   text-shadow: 4px 4px 7px black;
 }
 
+@media screen and (max-width: 812px){
+   
+}

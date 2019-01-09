@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import fire from '../../firebase';
 import { Grid, Modal, Button, Typography, FormControl, Input, InputLabel, Paper } from '@material-ui/core';
 import { Signup } from './Signup';
-import classes from './Login.module.css';
+import classes from './Login.module.scss';
 
 
 class Login extends Component {
@@ -49,13 +49,13 @@ class Login extends Component {
         return(
             <div className={classes.loginContainer}>
                 <Grid   container 
-                        className={classes.loginGrid}
+                        className={classes.loginGridContainer}
                         spacing={0}
                         direction="column"
                         alignItems="center"
                         justify="center"
                         style={{ minHeight: '100vh' }}>
-                    <Grid item xs={6}>
+                    <Grid className={classes.loginGrid} item xs={6}>
                         <h3 className={classes.welcomeText}>Welcome!</h3>
                         <Paper className={classes.loginPaper}>
                             <form>
@@ -71,8 +71,8 @@ class Login extends Component {
                                         <Input className={classes.loginInput} value={this.state.password} onChange={this.handleChange} type="password" name="password"/>
                                     </FormControl>
                                 </div>
-                                <Button size="large" variant="contained" color="primary" type="submit" onClick={this.login} style={{margin: '0 10px 0'}}>Login</Button>
-                                <Button size="large" variant="contained" color="secondary" onClick={this.openSignup} style={{margin: '0 10px 0'}}>Signup</Button>
+                                <Button size="large" variant="contained" color="primary" type="submit" onClick={this.login} className={classes.LoginButton}>Login</Button>
+                                <Button size="large" variant="contained" color="secondary" onClick={this.openSignup} className={classes.SignupButton}>Signup</Button>
                                 <Modal
                                     aria-labelledby="simple-modal-title"
                                     aria-describedby="simple-modal-description"

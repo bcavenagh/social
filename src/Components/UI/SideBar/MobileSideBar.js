@@ -6,7 +6,7 @@ import '../UI.css';
 import GroupForm from '../../Forms/GroupForm/GroupForm';
 import fire from '../../../firebase';
 
-class SideBar extends Component {
+class MobileSideBar extends Component {
   constructor(props){
     super(props);
         this.state={
@@ -110,11 +110,14 @@ class SideBar extends Component {
     }
     render(){
         let sideBarClasses;
+        let overlay;
         
         if(this.props.show){
-            sideBarClasses = [classes.SideBar, classes.Open].join(' ');
+            sideBarClasses = [classes.MobileSideBar, classes.MobileOpen].join(' ');
+            overlay = [classes.MobileOverlay]
         }else{
-            sideBarClasses = [classes.SideBar]
+            sideBarClasses = [classes.MobileSideBar]
+            overlay = ""
         }
         let groupsRender = null;
         if(this.state.groups.length > 0){
@@ -162,9 +165,12 @@ class SideBar extends Component {
             </div>
         }
         return(
-            <>{groupsRender}</>
+            <>
+                {groupsRender}
+                <div className={overlay}></div>
+            </>
         );
     }
 }
 
-export default SideBar;
+export default MobileSideBar;

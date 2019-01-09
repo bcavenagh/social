@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classes from './Layout.module.css';
 import TopBar from '../UI/TopBar/TopBar';
 import SideBar from '../UI/SideBar/SideBar';
+import MobileSideBar from '../UI/SideBar/MobileSideBar';
 import Dashboard from '../../Containers/Dashboard/Dashboard';
 import Spinner from '../UI/Spinner/Spinner';
 import fire from 'firebase';
@@ -28,7 +29,14 @@ class Layout extends Component {
         this.fetchGroups = this.fetchGroups.bind(this);
         this.child = React.createRef();
     }
-    
+    componentDidMount(){
+        let width = window.innerWidth;
+        if (width >! 812){
+            this.setState((prevState) => {
+                return{ sidebarOpen: !prevState.sidebarOpen };
+            });
+        }
+    }
     toggleSideBar = () => {
         this.setState((prevState) => {
             return{ sidebarOpen: !prevState.sidebarOpen };
@@ -201,9 +209,12 @@ class Layout extends Component {
         });
     }
     //REFRESH DASHBOARD
-
     render(){
-        let dash = null
+        let dash = null;
+        let sidebar = null;
+        let width = window.innerWidth;
+
+        //Sort out which Dash should get loaded
         if(this.state.index < 0){
             dash = <p>Please select a group to get started!</p>;
         }else if(!(this.state.hasEvents)){
@@ -227,18 +238,32 @@ class Layout extends Component {
                         refresh={this.setEvents}
                         handleRemoveGroup={this.handleRemoveGroup} />
         }
+
+        if(width > 812){
+            sidebar = <SideBar 
+                        show={this.state.sidebarOpen}
+                        ref={this.child}
+                        groupId={this.state.id} 
+                        toggleGroup={this.toggleGroup}
+                        removeGroup={this.state.removeGroup}
+                        hasGroup={this.state.hasGroups}
+                        togg={this.setGroups} />
+        }else{
+            sidebar = <MobileSideBar 
+                        show={this.state.sidebarOpen}
+                        ref={this.child}
+                        groupId={this.state.id} 
+                        toggleGroup={this.toggleGroup}
+                        removeGroup={this.state.removeGroup}
+                        hasGroup={this.state.hasGroups}
+                        togg={this.setGroups} />
+        }
+
             return(
                 <>
                     <TopBar toggle={this.toggleSideBar} isOpen={this.state.sidebar} logout={this.handleLogout}/>
                     <main className={classes.Main}>
-                        <SideBar 
-                            show={this.state.sidebarOpen}
-                            ref={this.child}
-                            groupId={this.state.id} 
-                            toggleGroup={this.toggleGroup}
-                            removeGroup={this.state.removeGroup}
-                            hasGroup={this.state.hasGroups}
-                            togg={this.setGroups}/>
+                        {sidebar}
                         {dash}
                     </main>
                 </>

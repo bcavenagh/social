@@ -13,6 +13,7 @@
     bottom:45px;
     right:45px;
     background: #40F281;
+    z-index:150;
     background: linear-gradient(0deg, rgb(108, 175, 144), rgb(73, 212, 157)) !important;
 }
 .Tooltip{

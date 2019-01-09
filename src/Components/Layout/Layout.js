@@ -31,9 +31,15 @@ class Layout extends Component {
     }
     componentDidMount(){
         let width = window.innerWidth;
-        if (width >! 812){
-            this.setState((prevState) => {
-                return{ sidebarOpen: !prevState.sidebarOpen };
+        console.log(width);
+        if (width > 812){
+            this.setState({
+                sidebarOpen: true
+            });
+        }
+        else{
+            this.setState({
+                sidebarOpen: false
             });
         }
     }

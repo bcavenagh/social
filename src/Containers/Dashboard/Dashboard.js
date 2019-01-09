@@ -172,16 +172,17 @@ class Dashboard extends Component {
             <div className={classes.Dashboard}>
                 <AppBar position="static" color="default" className={classes.AppBar}>
                     <Toolbar>
-                        <Typography variant="h3" color="inherit" className={classes.grow}>
+                        <h2 className={classes.grow}>
                             {this.props.group}
-                        </Typography>
-                        <p>
-                            Members: {this.props.members.length}
-                        </p>
+                        </h2>
                         <IconButton color="inherit" onClick={this.handleMenuOpen}>
                             <Settings/>
                         </IconButton>
+                        
                     </Toolbar>
+                    <p className={classes.MemberCount}>
+                        Members: {this.props.members.length}
+                    </p>
                 </AppBar>
                 
                 {content}

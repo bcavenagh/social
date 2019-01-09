@@ -350,6 +350,15 @@ h1 {
 
 
 @media only screen and (max-width: 812px){
+  .wrapper{
+    min-height: 250px !important;
+  }
+  .title{
+    font-size:20px;
+  }
+  .text{
+    font-size:15px;
+  }
   .mobilemenucontent{
     display: block;
   }

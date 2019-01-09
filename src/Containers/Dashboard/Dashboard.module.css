@@ -24,6 +24,13 @@
 .grow{
     flex-grow: 1;
 }
+.MemberCount{
+    width:100%;
+    padding: 0px 16px;
+}
 .MenuButtons{
     margin:10px!important;
+}
+@media only screen and (max-width: 812px){
+    .grow{font-size: 25px;}
 }

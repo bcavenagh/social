@@ -139,6 +139,31 @@ class Event extends Component {
             </ul>
           </div>
         </div>
+        <div className={classes.MobileRSVP}>
+          <ul className={classes.mobilemenucontent}>
+            <li>
+              <div className={classNames(classes.Button, classes.NotGoing, {[classes.NotGoingSelected]: this.state.userRSVP === 'Out'})}  onClick={(e) => this.handleRSVP('Out')}>
+                <span >{this.state.out}</span>
+                <Clear/>
+                <p className={classes.Label}>Out</p>
+              </div>
+            </li>
+            <li>
+              <div className={classNames(classes.Button, classes.Interested, {[classes.InterestedSelected]: this.state.userRSVP === 'Interested'})}  onClick={(e) => this.handleRSVP('Interested')}>
+                <span>{this.state.interested}</span>
+                <Grade/>
+                <p className={classes.Label}>Interested</p>
+              </div>
+            </li>
+            <li>
+              <div className={classNames(classes.Button, classes.Going, {[classes.GoingSelected]: this.state.userRSVP === 'Going'})} onClick={(e) => this.handleRSVP('Going')}>
+                <span>{this.state.going}</span>
+                <Done/>
+                <p className={classes.Label}>Going</p>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     )}

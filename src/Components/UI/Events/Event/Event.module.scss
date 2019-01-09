@@ -60,7 +60,32 @@ h1 {
   float: left;
   padding: 0;
   width: 100%;
+  position: relative;
   .menucontent {
+    @include cf;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    li {
+      display: inline-block;
+    }
+    a {
+      color: $white;
+    }
+    .Button {
+      color: $white;
+    }
+    span {
+      position: absolute;
+      left: 50%;
+      top: 3%;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: 'Open Sans';
+      transform: translate(-50%, 0);
+    }
+  }
+  .mobilemenucontent {
     @include cf;
     margin: 0;
     padding: 0;
@@ -254,7 +279,57 @@ h1 {
       bottom: -5px;
       left: 50%;
       transform: translate(-50%,0%);
+    }
+  }
 
+.mobilemenucontent {
+    li {
+      width: 33.333333%;
+      float: left;
+      background-color: $gray;
+      height: 60px;
+      position: relative;
+    }
+    .NotGoing:hover{background-color: $salmon; cursor: pointer;}
+    .Interested:hover{background-color: $brass; cursor: pointer;}
+    .Going:hover{background-color: $bermuda; cursor: pointer;}
+
+    .NotGoingSelected{background-color: $salmon; cursor: pointer;}
+    .InterestedSelected{background-color: $brass; cursor: pointer;}
+    .GoingSelected{background-color: $bermuda; cursor: pointer;}
+    a {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      height:100%;
+      width:100%;
+    }
+    .Button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      height:100%;
+      width:100%;
+    }
+    span {
+      top: -10px;
+    }
+    svg{
+      position: absolute;
+      top:50%;
+      left:50%;
+      transform: translate(-50%,-50%)
+    }
+    .Label{
+      font-size: 12px;
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translate(-50%,0%);
     }
   }
 .Default{background-color: $black;}
@@ -272,3 +347,21 @@ h1 {
 .Outdoors{background: url('../../../../Assets/images/Outdoors.png') center center / cover no-repeat;}
 .Party{background: url('../../../../Assets/images/Party.png') center center / cover no-repeat;}
 .Travel{background: url('../../../../Assets/images/Travel.png') center center / cover no-repeat;}
+
+
+@media only screen and (max-width: 812px){
+  .mobilemenucontent{
+    display: block;
+  }
+  .menucontent{
+    display: none;
+  }
+}
+@media only screen and (min-width: 812px){
+  .mobilemenucontent{
+    display: none;
+  }
+  .menucontent{
+    display: block;
+  }
+}

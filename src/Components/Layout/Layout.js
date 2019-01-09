@@ -135,7 +135,7 @@ class Layout extends Component {
                         let newEvent = {
                             name:snapshot.val().name,
                             description:snapshot.val().description,
-                            snippet:snapshot.val().description.substring(0,10),
+                            snippet:snapshot.val().description.substring(0,150),
                             date: snapshot.val().date,
                             day: this.getDay(snapshot.val().date),
                             month: this.getMonth(snapshot.val().date),

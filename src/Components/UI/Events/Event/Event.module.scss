@@ -129,12 +129,15 @@ h1 {
     position: absolute;
     bottom: 0;
     width: 100%;
-    transform: translateY(calc(70px + 1em));
+    transform: translateY(calc(110px + 1em));
     transition: transform 0.3s;
     .content {
       padding: 1em;
       position: relative;
       z-index: 1;
+      .ReadMore{
+        width: 100%;
+      }
     }
   }
   .author {

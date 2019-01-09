@@ -3,9 +3,13 @@ import classes from './Event.module.scss';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import fire from '../../../../firebase';
+
+import { Button } from '@material-ui/core';
+
 import Grade from '@material-ui/icons/Grade';
 import Done from '@material-ui/icons/Done';
 import Clear from '@material-ui/icons/Clear';
+
 
 class Event extends Component {
   constructor(props){
@@ -112,7 +116,8 @@ class Event extends Component {
             <div className={classes.content}>
               {/* <span className={classes.author}>Jane Doe</span> */}
               <h1 className={classes.title} >{this.props.name}</h1>
-              <p className={classes.text}>{this.props.description}</p>
+              <p className={classes.text}>{this.props.snippet}...</p>
+              <Button onClick={(e) => this.props.open(this.props.event)} className={classes.ReadMore}>Read More</Button>
               <label className={classes.menubutton} onClick={(e) => this.props.open(this.props.event)}><span></span></label>
             </div>
             {/* <input type="checkbox" id={classes.showmenu} /> */}

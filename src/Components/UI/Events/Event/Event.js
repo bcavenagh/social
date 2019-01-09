@@ -14,54 +14,46 @@ class Event extends Component {
       count: 0,
       going: 0,
       interested: 0,
-      out: 0
+      out: 0,
+      userRSVP: ''
     };
   }
   componentDidMount(){
     const participantsRef = fire.database().ref('events').child(this.props.eventId).child('participants');
-    
+    const user = fire.auth().currentUser.uid;
     participantsRef.once('value', snap => {
-      console.log(snap);
-      let countGoing = 0;
-      let countInterested = 0;
-      let countOut = 0;
       snap.forEach((participant) => {
         console.log(participant);
+        if(participant.key === user){
+          this.setState({userRSVP: participant.val()});
+          console.log("Participant: " + participant + "valeu: " +  participant.val());
+        }
         switch(participant.val()){
           case 'Going':
-            countGoing++;
             this.setState((prevState, props) => {return{going: prevState.going + 1}});
             break;
           case 'Interested':
-            countInterested++;
             this.setState((prevState, props) => {return{interested: prevState.interested + 1}});
             break;
           case 'Out':
-            countOut++;
             this.setState((prevState, props) => {return{out: prevState.out + 1}});
             break;
           default: return;
         }
-        console.log(participant.val() + "Going: " + countGoing + " -- Interested: " + countInterested + " -- Out: " + countOut);
       })
     })
   }
 
   handleRSVP(choice){
-    console.log(choice);
     const eventsRef = fire.database().ref('events').child(this.props.eventId);
     const user = fire.auth().currentUser.uid;
     eventsRef.child('participants').child(user).set(choice);
-    
     const participantsRef = fire.database().ref('events').child(this.props.eventId).child('participants');
-    
     participantsRef.once('value', snap => {
-      console.log(snap);
       let countGoing = 0;
       let countInterested = 0;
       let countOut = 0;
       snap.forEach((participant) => {
-        console.log(participant);
         switch(participant.val()){
           case 'Going':
             countGoing++;
@@ -74,15 +66,14 @@ class Event extends Component {
             break;
           default: return;
         }
-        console.log(participant.val() + "Going: " + countGoing + " -- Interested: " + countInterested + " -- Out: " + countOut);
         this.setState({
           going: countGoing,
           interested: countInterested,
-          out: countOut
+          out: countOut,
+          userRSVP: choice
         });
       })
     })
-
   }
   render(){
     return(
@@ -125,21 +116,21 @@ class Event extends Component {
             {/* <input type="checkbox" id={classes.showmenu} /> */}
             <ul className={classes.menucontent}>
               <li>
-                <div className={classNames(classes.Button, classes.NotGoing)}  onClick={(e) => this.handleRSVP('Out')}>
+                <div className={classNames(classes.Button, classes.NotGoing, {[classes.NotGoingSelected]: this.state.userRSVP === 'Out'})}  onClick={(e) => this.handleRSVP('Out')}>
                   <span >{this.state.out}</span>
                   <Clear/>
                   <p className={classes.Label}>Out</p>
                 </div>
               </li>
               <li>
-                <div className={classNames(classes.Button, classes.Interested)}  onClick={(e) => this.handleRSVP('Interested')}>
+                <div className={classNames(classes.Button, classes.Interested, {[classes.InterestedSelected]: this.state.userRSVP === 'Interested'})}  onClick={(e) => this.handleRSVP('Interested')}>
                   <span>{this.state.interested}</span>
                   <Grade/>
                   <p className={classes.Label}>Interested</p>
                 </div>
               </li>
               <li>
-                <div className={classNames(classes.Button, classes.Going)} onClick={(e) => this.handleRSVP('Going')}>
+                <div className={classNames(classes.Button, classes.Going, {[classes.GoingSelected]: this.state.userRSVP === 'Going'})} onClick={(e) => this.handleRSVP('Going')}>
                   <span>{this.state.going}</span>
                   <Done/>
                   <p className={classes.Label}>Going</p>

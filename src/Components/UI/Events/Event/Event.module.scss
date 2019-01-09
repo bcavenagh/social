@@ -217,6 +217,10 @@ h1 {
     .NotGoing:hover{background-color: $salmon; cursor: pointer;}
     .Interested:hover{background-color: $brass; cursor: pointer;}
     .Going:hover{background-color: $bermuda; cursor: pointer;}
+
+    .NotGoingSelected{background-color: $salmon; cursor: pointer;}
+    .InterestedSelected{background-color: $brass; cursor: pointer;}
+    .GoingSelected{background-color: $bermuda; cursor: pointer;}
     a {
       position: absolute;
       top: 50%;

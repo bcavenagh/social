@@ -281,7 +281,16 @@ h1 {
       transform: translate(-50%,0%);
     }
   }
-
+.mobiledata{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  .content {
+    padding: 1em;
+    position: relative;
+    z-index: 1;
+  }
+}
 .mobilemenucontent {
     li {
       width: 33.333333%;
@@ -350,6 +359,9 @@ h1 {
 
 
 @media only screen and (max-width: 812px){
+  .row{
+   margin:0 auto; 
+  }
   .wrapper{
     min-height: 250px !important;
   }
@@ -359,18 +371,19 @@ h1 {
   .text{
     font-size:15px;
   }
-  .mobilemenucontent{
+  .mobilemenucontent, .mobilerow{
     display: block;
   }
-  .menucontent{
+  .menucontent, .row{
     display: none;
   }
 }
 @media only screen and (min-width: 812px){
-  .mobilemenucontent{
+  .mobilemenucontent, .mobilerow{
     display: none;
   }
-  .menucontent{
+  .menucontent, .row{
     display: block;
   }
+
 }

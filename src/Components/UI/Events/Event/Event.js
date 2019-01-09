@@ -44,11 +44,6 @@ class Event extends Component {
         }
         console.log(participant.val() + "Going: " + countGoing + " -- Interested: " + countInterested + " -- Out: " + countOut);
       })
-      // counter++;
-      // this.setState({
-      //   count: this.state.count + 1
-      // })
-      // console.log(counter)
     })
   }
 
@@ -56,9 +51,6 @@ class Event extends Component {
     console.log(choice);
     const eventsRef = fire.database().ref('events').child(this.props.eventId);
     const user = fire.auth().currentUser.uid;
-    // if(eventsRef.hasChild('participants')){
-    //   eventsRef.child('participants').push(user);
-    // }
     eventsRef.child('participants').child(user).set(choice);
     
     const participantsRef = fire.database().ref('events').child(this.props.eventId).child('participants');
@@ -73,15 +65,12 @@ class Event extends Component {
         switch(participant.val()){
           case 'Going':
             countGoing++;
-            // this.setState((prevState, props) => {return{going: prevState.going + 1}});
             break;
           case 'Interested':
             countInterested++;
-            // this.setState((prevState, props) => {return{interested: prevState.interested + 1}});
             break;
           case 'Out':
             countOut++;
-            // this.setState((prevState, props) => {return{out: prevState.out + 1}});
             break;
           default: return;
         }
@@ -96,21 +85,31 @@ class Event extends Component {
 
   }
   render(){
-    // const { classes } = this.props;
     return(
     
     <div className={classes.row}>
       <div className={classes.card}>
-        <div className={classes.wrapper}>
+        <div className={classNames(
+          classes.wrapper,
+            {
+              [classes.Birthday]: this.props.event.eventType === 'birthday',
+              [classes.Entertainment]: this.props.event.eventType === 'entertainment',
+              [classes.FoodDrink]: this.props.event.eventType === 'fooddrink',
+              [classes.GameNight]: this.props.event.eventType === 'gamenight',
+              [classes.Meetup]: this.props.event.eventType === 'meetup',
+              [classes.Outdoors]: this.props.event.eventType === 'outdoors',
+              [classes.Party]: this.props.event.eventType === 'party',
+              [classes.Travel]: this.props.event.eventType === 'travel',
+              
+            })}>
           <div className={classNames(
-            classes.date, 
-              {
-                [classes.Salmon]: this.props.colorHex === '#FF5733', 
-                [classes.Mint]: this.props.colorHex === '#07E796',
-                [classes.Brass]: this.props.colorHex === '#E79007', 
-                [classes.Royal]: this.props.colorHex === '#7117C7',
-                [classes.Default]: this.props.colorHex === '',
-              }
+            classes.date, classes.Default,
+              // {
+              //   [classes.Salmon]: this.props.event.colorHex === '#FF5733', 
+              //   [classes.Mint]: this.props.event.colorHex === '#07E796',
+              //   [classes.Brass]: this.props.event.colorHex === '#E79007', 
+              //   [classes.Royal]: this.props.event.colorHex === '#7117C7',
+              // }
           )}>
             <span className={classes.day}>{this.props.day}</span> 
             <span className={classes.month}>{this.props.month}</span>

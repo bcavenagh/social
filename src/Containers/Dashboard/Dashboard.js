@@ -51,9 +51,9 @@ class Dashboard extends Component {
             name: event.name,
             description: event.description,
             date: event.date,
-            colorHex: event.colorHex,
             groupid: event.groupid,
             id: event.id,
+            eventType: event.eventType,
             postedBy: event.postedBy
         });
         fire.database().ref('groups').child(event.groupid).child('events').child(event.id).set({

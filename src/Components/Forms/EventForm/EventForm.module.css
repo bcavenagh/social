@@ -39,3 +39,13 @@ form{
     height:50px;
     width:100%;
 }
+.SelectContainer{
+    widows: 100%;;
+    margin: 25px 0px;
+}
+.SelectType{
+    width:90%;
+}
+.SelectLabel{
+    width:10%;
+}

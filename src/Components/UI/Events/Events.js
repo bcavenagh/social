@@ -16,7 +16,6 @@ const events = (props) => (
                         day={event.day}
                         month={event.month}
                         year={event.year}
-                        colorHex={event.colorHex}
                         id={event.groupid} 
                         key={event.id}
                         open={props.openEvent}
@@ -28,9 +27,5 @@ const events = (props) => (
         </Grid> 
     </div>
 );
-
-Event.defaultProps = {
-    colorHex: '',
-};
 
 export default events;

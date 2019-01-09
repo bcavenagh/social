@@ -140,7 +140,8 @@ class Layout extends Component {
                             day: this.getDay(snapshot.val().date),
                             month: this.getMonth(snapshot.val().date),
                             year: this.getYear(snapshot.val().date),
-                            colorHex: snapshot.val().colorHex,
+                            // colorHex: snapshot.val().colorHex,
+                            eventType: snapshot.val().eventType,
                             groupid:this.state.id,
                             id: snapshot.key
                         };

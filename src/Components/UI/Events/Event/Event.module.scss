@@ -1,72 +1,4 @@
-// .Salmon{
-//     border-bottom:5px solid #FF5733;
-// }
-// .Mint{
-//     border-bottom:5px solid #07E796;
-// }
-// .Brass{
-//     border-bottom:5px solid #E79007;
-// }
-// .Royal{
-//     border-bottom:5px solid #7117C7;
-// }
 
-// .Event{
-//     background-color: white;
-//     display: flex;
-//     position: relative;
-//     border-radius:4px;
-//     box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12);
-//     .grow{flex-grow: 1;}
-//     .EventVitals{
-//         display: flex;
-//         justify-content: space-between;
-//         height:100px;
-//         padding:0 15px;
-//         .Title{
-//             position: absolute;
-//             top: 80px;
-//             left:15px;
-//             margin:0 !important;
-//             text-transform: uppercase;
-//             transition: 1s all;
-//         }
-//         .Date{
-//             position: absolute;
-//             top:80px;
-//             right:15px;
-//             margin:0 !important;
-//             transition: 1s all;
-//         }   
-//     }
-//     .EventExtras{
-//         display: flex;
-//         justify-content: flex-end;
-//         padding: 0 15px;
-//         height:0px;
-//         transition: 1s all;
-//     }
-    
-// }
-
-
-
-// // ON ACTIONS
-// .Event:hover{
-//     cursor: pointer;
-//     .EventVitals{
-//         height:20px;
-//         .Title{
-//             top:10px;
-//         }
-//         .Date{
-//             top:10px;
-//         }
-//     }
-//     .EventExtras{
-//         height:80px;
-//     }
-// }
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
 // Variables
 $regal-blue: #034378;
@@ -190,17 +122,11 @@ h1 {
     height: 70px;
     margin: 0;
   }
-//   input[type='checkbox'] {
-//     display: none;
-//   }
-//   input[type='checkbox']:checked + .menucontent {
-//     transform: translateY(-60px);
-//   }
 }
 
 // First example styles
   .wrapper {
-    background: url('https://wallpapershome.com/images/pages/pic_v/667.jpg') 20% 1% / cover no-repeat;
+    background: url('../../../../Assets/images/Travel.png') center center / cover no-repeat;
   }
   .date {
     position: absolute;
@@ -327,10 +253,18 @@ h1 {
 
     }
   }
-
+.Default{background-color: $black;}
 .Salmon{background-color: $salmon;} 
 .Mint {background-color: $mint;}
 .Brass{background-color: $brass;} 
 .Lavendar{background-color: $lavendar;}
 .Royal{background-color: $regal-blue;}
-.Default{background-color: $black;}
+
+.Birthday{background: url('../../../../Assets/images/Birthday.png') center center / cover no-repeat;}
+.Entertainment{background: url('../../../../Assets/images/Entertainment.png') center center / cover no-repeat;}
+.FoodDrink{background: url('../../../../Assets/images/Food&Drink.png') center center / cover no-repeat;}
+.GameNight{background: url('../../../../Assets/images/GameNight.png') center center / cover no-repeat;}
+.Meetup{background: url('../../../../Assets/images/Meetup.png') center center / cover no-repeat;}
+.Outdoors{background: url('../../../../Assets/images/Outdoors.png') center center / cover no-repeat;}
+.Party{background: url('../../../../Assets/images/Party.png') center center / cover no-repeat;}
+.Travel{background: url('../../../../Assets/images/Travel.png') center center / cover no-repeat;}

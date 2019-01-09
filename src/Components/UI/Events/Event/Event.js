@@ -78,6 +78,7 @@ class Event extends Component {
   render(){
     return(
     <>
+    {/* DESKTOP CARD */}
     <div className={classes.row}>
       <div className={classes.card}>
         <div className={
@@ -142,7 +143,9 @@ class Event extends Component {
         </div>
       </div>
     </div>
-
+    
+    
+    {/* MOBILE CARD */}
     <div className={classes.mobilerow}>
       <div className={classes.card}>
         <div className={
@@ -208,7 +211,7 @@ class Event extends Component {
         </div>
       </div>
     </div>
-</>
+    </>
     )}
   }
 

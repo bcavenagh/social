@@ -267,13 +267,13 @@ class Layout extends Component {
         }
 
             return(
-                <>
+                <div className = {classes.FullApp}>
                     <TopBar toggle={this.toggleSideBar} isOpen={this.state.sidebar} logout={this.handleLogout}/>
                     <main className={classes.Main}>
                         {sidebar}
                         {dash}
                     </main>
-                </>
+                </div>
             )
     }
 }

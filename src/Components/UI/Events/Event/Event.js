@@ -80,6 +80,10 @@ class Event extends Component {
     })
   }
   render(){
+    let title = this.props.name;
+    if(title.length > 50){
+      title = title.substring(0,40) + '...';
+    }
     return(
     <>
     {/* DESKTOP CARD */}
@@ -115,7 +119,7 @@ class Event extends Component {
           <div className={classes.data}>
             <div className={classes.content}>
               {/* <span className={classes.author}>Jane Doe</span> */}
-              <h1 className={classes.title} >{this.props.name}</h1>
+              <h1 className={classes.title} >{title}</h1>
               <p className={classes.text}>{this.props.snippet}...</p>
               <Button onClick={(e) => this.props.open(this.props.event)} className={classes.ReadMore}>Read More</Button>
               <label className={classes.menubutton} onClick={(e) => this.props.open(this.props.event)}><span></span></label>

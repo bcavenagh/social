@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classes from './Dashboard.module.css';
 import Events from '../../Components/UI/Events/Events';
-import { Button, Fab, Tooltip, AppBar, Toolbar, Typography, Modal, IconButton, Menu } from '@material-ui/core';
+import { Button, Fab, Tooltip, AppBar, Toolbar, Modal, IconButton, Menu } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import Close from '@material-ui/icons/Close';
 import EventForm from '../../Components/Forms/EventForm/EventForm';

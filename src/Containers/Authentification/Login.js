@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import fire from '../../firebase';
-import { Grid, Modal, Button, Typography, FormControl, Input, InputLabel, Paper } from '@material-ui/core';
+import { Grid, Modal, Button, FormControl, Input, InputLabel, Paper } from '@material-ui/core';
 import { Signup } from './Signup';
 import classes from './Login.module.scss';
 

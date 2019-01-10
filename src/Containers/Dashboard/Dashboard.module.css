@@ -1,9 +1,9 @@
 .Dashboard{
     background-color: #f4f4f6;
-    width:100%;
+    width:75vw;
     position: relative;
     overflow-y: scroll;
-    padding:25px;
+    padding:25px 25px 150px 25px;
     z-index: 125;
     box-shadow: inset 4px 17px 76px -30px rgba(0,0,0,0.75);
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './Group.module.css';
+import classes from './Group.module.scss';
 import { ListItem, ListItemText, Divider } from '@material-ui/core';
 
 const group = (props) => {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classes from './Dashboard.module.css';
+import classes from './Dashboard.module.scss';
 import Events from '../../Components/UI/Events/Events';
 import { Button, Fab, Tooltip, AppBar, Toolbar, Modal, IconButton, Menu } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';

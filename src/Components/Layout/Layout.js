@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import classes from './Layout.module.css';
+import classes from './Layout.module.scss';
 import TopBar from '../UI/TopBar/TopBar';
 import SideBar from '../UI/SideBar/SideBar';
 import MobileSideBar from '../UI/SideBar/MobileSideBar';
 import Dashboard from '../../Containers/Dashboard/Dashboard';
+import DashPlaceholder from '../UI/DashPlaceholder/DashPlaceholder';
 import Spinner from '../UI/Spinner/Spinner';
 import fire from 'firebase';
 
@@ -223,7 +224,7 @@ class Layout extends Component {
 
         //Sort out which Dash should get loaded
         if(this.state.index < 0){
-            dash = <p>Please select a group to get started!</p>;
+            dash = <DashPlaceholder/>;
         }else if(!(this.state.hasEvents)){
             dash = <Dashboard 
                         group={this.state.group} 

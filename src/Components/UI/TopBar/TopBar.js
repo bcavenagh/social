@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from '../../../Assets/logo.png';
-import classes from './TopBar.module.css';
+import classes from './TopBar.module.scss';
 import { IconButton, Menu, MenuItem, Toolbar} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';

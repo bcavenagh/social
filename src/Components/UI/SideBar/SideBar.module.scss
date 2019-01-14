@@ -1,3 +1,5 @@
+$FreshBlue: #4ABDAC;
+$FreshBlue-Transparent: #4ABDACBF;
 .SideBar{
     width:0vw;
     position: relative;
@@ -27,12 +29,12 @@
 .Button{
     height:100%;
     width:100%;
-    background-color:rgba(73, 212, 157, 0.75) !important;
+    background-color:$FreshBlue-Transparent !important;
     /* background: linear-gradient(0deg, rgb(108, 175, 144), rgba(73, 212, 157, 0.75)) !important;     */
     border-radius: 0px !important;
 }
 .Button:hover{
-    background-color:rgba(73, 212, 157, 1) !important;
+    background-color:$FreshBlue !important;
 }
 .ButtonText{
     font-weight: 900 !important;

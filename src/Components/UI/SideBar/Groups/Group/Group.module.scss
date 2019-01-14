@@ -1,10 +1,11 @@
+
+$FreshBlue: #4ABDAC;
 .Group{
     height:50px;
     padding:0px !important;
 }
-
 .Divider{
-    background-color: #49d49d !important;
+    background-color: $FreshBlue !important;
     margin-left:45px !important;
 }
 .GroupTitle{

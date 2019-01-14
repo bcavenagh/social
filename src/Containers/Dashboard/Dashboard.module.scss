@@ -1,6 +1,8 @@
+$FreshBlue: #4ABDAC;
+$CleanWhite: #DFDCE3;
 .Dashboard{
-    background-color: #f4f4f6;
-    width:75vw;
+    background-color: $CleanWhite;
+    width:100%;
     position: relative;
     overflow-y: scroll;
     padding:25px 25px 150px 25px;
@@ -12,9 +14,9 @@
     position: fixed !important;
     bottom:45px;
     right:45px;
-    background: #40F281;
+    background: $FreshBlue !important;
     z-index:150;
-    background: linear-gradient(0deg, rgb(108, 175, 144), rgb(73, 212, 157)) !important;
+    // background: linear-gradient(0deg, rgb(108, 175, 144), rgb(73, 212, 157)) !important;
 }
 .Tooltip{
     font-size: 15px;
@@ -22,7 +24,7 @@
 .AppBar{
     margin-bottom: 20px;
 }
-.grow{
+.grow{ 
     flex-grow: 1;
     margin: 12px 0px;
 }

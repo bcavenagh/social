@@ -1,0 +1,65 @@
+$FreshBlue: #4ABDAC;
+$CleanWhite: #DFDCE3;
+$VermillionRed: #FC4A1A;
+$SunshineYellow: #F7B733;
+.Dash{
+    width:100%;
+    position: relative;
+    height:100%;
+    text-align: center;
+    font-family: 'Comfortaa';
+    background-color: $CleanWhite;
+    background: linear-gradient(-45deg, $VermillionRed, $SunshineYellow, $FreshBlue, #23A6D5);
+	background-size: 400% 400%;
+	-webkit-animation: Gradient 15s ease infinite;
+	-moz-animation: Gradient 15s ease infinite;
+	animation: Gradient 15s ease infinite;
+}
+.Text{
+    position: absolute;
+    width:75%;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 55px;
+    font-weight: bold;
+    color: $CleanWhite;
+    text-shadow: 2px 2px 13px black;
+}
+
+
+@-webkit-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@-moz-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}

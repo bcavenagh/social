@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Paper, Button, TextField } from '@material-ui/core';
-import classes from './SettingsModal.module.css';
+import classes from './SettingsModal.module.scss';
 import fire from '../../../firebase';
 
 class SettingsModal extends Component {

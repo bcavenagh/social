@@ -33,9 +33,9 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
+      <>
         {this.userReady()}
-      </div>
+      </>
     );
   }
 }

@@ -26,7 +26,20 @@ $SunshineYellow: #F7B733;
     color: $CleanWhite;
     text-shadow: 2px 2px 13px black;
 }
-
+.Chevron1, .Chevron2{
+    position: absolute;
+    left: 0;
+    height:50px !important;
+    width:50px !important;
+    -webkit-animation: bounceLeft 2s infinite;
+    animation: bounceLeft 2s infinite;
+}
+.Chevron1{
+    top:0;
+}
+.Chevron2{
+    bottom: 0;
+}
 
 @-webkit-keyframes Gradient {
 	0% {
@@ -63,3 +76,57 @@ $SunshineYellow: #F7B733;
 		background-position: 0% 50%
 	}
 }
+
+
+@-webkit-keyframes bounceLeft {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+    }
+    40% {
+      -webkit-transform: translateX(30px);
+      transform: translateX(30px);
+    }
+    60% {
+      -webkit-transform: translateX(15px);
+      transform: translateX(15px);
+    }
+  }
+  @-moz-keyframes bounceLeft {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      transform: translateX(0);
+    }
+    40% {
+      transform: translateX(30px);
+    }
+    60% {
+      transform: translateX(15px);
+    }
+  }
+  @keyframes bounceLeft {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      -ms-transform: translateX(0);
+      transform: translateX(0);
+    }
+    40% {
+      -ms-transform: translateX(30px);
+      transform: translateX(30px);
+    }
+    60% {
+      -ms-transform: translateX(15px);
+      transform: translateX(15px);
+    }
+  }
+  /* /left bounce */

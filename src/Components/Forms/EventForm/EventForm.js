@@ -60,7 +60,7 @@ class EventForm extends Component {
     render(){
         return(
         <Paper className={classes.EventForm}>
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} className={classes.Form}>
                 <div className={classes.FormTitle}><h4>Create a New Event</h4></div>
                 <div className={classes.InputContainer}>
                     <TextField

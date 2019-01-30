@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Layout from './Components/Layout/Layout';
 import fire from './firebase';
-import Login from './Containers/Authentification/Login';
+import Authentification from './Containers/Authentification/Authentification';
 
 class App extends Component {
   constructor(props){
@@ -28,7 +28,7 @@ class App extends Component {
     if(this.state.isReady){
       return(<Layout />);
     }else{
-      return(<Login />)
+      return(<Authentification />)
     }
   }
   render() {

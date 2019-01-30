@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa');
+
+$FreshBlue: #4ABDAC;
+$CleanWhite: #DFDCE3;
+$VermillionRed: #FC4A1A;
+$SunshineYellow: #F7B733;
+
+.LoginContainer{
+   text-align:center;
+   position: absolute;
+   width:100%;
+   padding:20px 0px 50px;
+   background-color: white;
+   transition: all .4s;
+   height: 100%;
+   display: flex;
+   align-items: center;
+}
+.loginFormContainer{
+   width: 100%;
+}
+.Open{
+   top: 50%;
+   transform:translateY(-50%);
+}
+.Close{
+   top:-100%;
+   transform: (0, 0);
+}
+
+.loginInputContainer{
+   margin:2px 0;
+}
+.loginInput{
+   font-family: "Comfortaa";
+   padding-left: 15px;
+   width:100%;
+   height:50px;
+   background-color: $CleanWhite;
+   border:none;
+   font-size: 20px;
+}
+.LoginButtonGroup{
+   margin-top:25px;
+   button{
+      width:100%;
+      height:50px;
+      margin:4px 0;
+      border:none;
+      text-transform: uppercase;
+      color:white;
+      font-size: 20px;
+      opacity: 0.75;
+   }
+   .LoginButton{
+      background-color: $FreshBlue;
+   }
+   .SignupButton{
+      background-color: $VermillionRed;
+   }
+   button:hover{
+      opacity: 1;;
+   }
+}
+

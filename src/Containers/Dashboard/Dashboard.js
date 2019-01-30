@@ -8,6 +8,7 @@ import EventForm from '../../Components/Forms/EventForm/EventForm';
 import fire from 'firebase';
 import Settings from '@material-ui/icons/Settings';
 import SettingsModal from '../../Components/Forms/SettingsModal/SettingsModal';
+import AddMembers from '../../Components/Forms/AddMembers/AddMembers';
 
 class Dashboard extends Component {
     constructor(props){
@@ -18,10 +19,12 @@ class Dashboard extends Component {
                     // description:'Here is what an event would look like in your dashboard. This is where the description of the event is written. It will stretch the card to fit the wording.', 
                     // groupid: this.props.groupId}
                 ],
+                members: this.props.members,
                 openEventForm: false,
                 openSettings: false,
+                openAddMember: false,
                 openEventDetails: false,
-                groupid: '',
+                // groupid: '',
                 eventDetails: null
             }
             this.findUsersMatchingEmail = this.findUsersMatchingEmail.bind(this);
@@ -30,9 +33,15 @@ class Dashboard extends Component {
         this.setState({
             openEventForm: false,
             openSettings: false,
+            openAddMember: false,
             openEventDetails: false,
             eventDetails: null
         })
+    }
+    handleMembers = (newMembers) => {
+        this.setState(previousState => ({ 
+            members: [...previousState.members, newMembers] 
+        }));
     }
     openEventForm = () => {
         this.setState({ openEventForm: true });
@@ -42,6 +51,9 @@ class Dashboard extends Component {
     }
     openSettings = () => {
         this.setState({ openSettings: true });
+    };
+    openAddMember = () => {
+        this.setState({ openAddMember: true });
     };
     closeSettings = () => {
         this.setState({ openSettings: false });
@@ -88,15 +100,6 @@ class Dashboard extends Component {
         eventsRef.remove();
         this.props.refresh(this.props.groupId);
     }
-    handleAddMember = () => {
-        var email = prompt("Enter the person's email and press submit");
-        if (email != null) {    
-            this.findUsersMatchingEmail(email, this.props.groupId);
-            this.handleMenuClose();
-            this.props.refresh(this.props.groupId);
-        }
-        
-    }
     /**
      * @param {string} emailAddress
      * @return {Object} the object contains zero or more user records, the keys are the users' ids
@@ -107,7 +110,6 @@ class Dashboard extends Component {
         userRef.orderByChild('email').equalTo(emailAddress).once('value', function(snap) {
             if(snap.val()){
                 snap.forEach(user => {
-                    console.log(user.key);
                     membersRef.child(user.key).set({
                         id: user.key
                     })
@@ -121,18 +123,7 @@ class Dashboard extends Component {
         });
         
     }
-    // findUsersMatchingUsername( username ) {
-    //     let userRef = fire.database().ref('users');
-    //     userRef.orderByChild('username').equalTo(username).once('value', snap => {
-    //         if(snap.val()){
-    //             snap.forEach(user => {
-    //                 console.log(user.key);
-    //             })
-    //         }else{
-    //             alert(username + ' exists?: false');
-    //         }
-    //     });
-    // }
+
 
     render(){
         var today = new Date();
@@ -175,13 +166,25 @@ class Dashboard extends Component {
                         <h2 className={classes.grow}>
                             {this.props.group}
                         </h2>
-                        <IconButton color="inherit" onClick={this.handleMenuOpen}>
+                        {/* <IconButton 
+                            color="inherit"
+                            aria-owns={open ? 'dash-appbar' : undefined}
+                            aria-haspopup="true"
+                            onClick={this.handleMenuOpen}>
                             <Settings/>
-                        </IconButton>
-                        
+                        </IconButton> */}
+                        <Button
+                            variant="outlined" 
+                            onClick={this.openAddMember} 
+                            className={classes.MenuButtons}>Add Members</Button>
+                        <Button 
+                            variant="contained" 
+                            color="secondary" 
+                            onClick={this.handleLeaveGroup} 
+                            className={classes.MenuButtons}>Leave Group</Button>
                     </Toolbar>
                     <p className={classes.MemberCount}>
-                        Members: {this.props.members.length}
+                        <span className={classes.bold}>{this.state.members.length}</span> members
                     </p>
                 </AppBar>
                 
@@ -211,9 +214,19 @@ class Dashboard extends Component {
                 >
                     {detailsModal}
                 </Modal>
-
+                <Modal
+                    aria-labelledby="simple-modal-title"
+                    aria-describedby="simple-modal-description"
+                    open={this.state.openAddMember}
+                    onClose={this.closeModals}
+                >
+                    <AddMembers 
+                        groupId={this.props.groupId} 
+                        handleMembers={this.handleMembers}
+                        close={this.closeModals}/>
+                </Modal>
                 <Menu
-                    id="menu-appbar"
+                    id="dash-appbar"
                     anchorEl={anchorEl}
                     anchorOrigin={{
                         vertical: 'top',
@@ -224,7 +237,7 @@ class Dashboard extends Component {
                         horizontal: 'right',
                     }}
                     open={open}
-                    onClose={this.closeModals}
+                    onClick={this.closeModals}
                     >
                         <Button 
                             variant="outlined" 

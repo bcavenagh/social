@@ -1,0 +1,101 @@
+$FreshBlue: #4ABDAC;
+$CleanWhite: #DFDCE3;
+$VermillionRed: #FC4A1A;
+$SunshineYellow: #F7B733;
+
+.Overlay{
+    width: 100vw;;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 65;
+    background: rgba(0,0,0,0.7);
+}
+.AddMembersModalContainer{
+    width:45%;
+    min-width: 320px;
+    height:55%;
+    min-height:500px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 69;
+    background: white;
+    box-shadow:0px 4px 25px black; 
+    .TitleBar{
+        background: $FreshBlue;
+        width:75%;
+        height: 75px;
+        margin: -50px auto 0 ;
+        box-shadow:0px 4px 16px rgba(0,0,0,0.25);
+        .Title{
+            line-height:75px;
+            color:white;
+            font-weight: bold;
+        }
+    }
+    .EmailInputBar{
+        width:75%;
+        margin: 50px auto 25px;
+        position: relative;
+        .Email{
+            width: 100%;
+            border: 1px solid rgba(0,0,0,0.7);
+            padding: 15px;
+        }
+        .IconsContainer{
+            position: absolute;
+                right:0;
+                top:0;
+                height: 100%;
+                display: flex;
+                align-items: center;
+            .SearchIcon{
+                padding: 0 15px;
+                height: 100%;
+                display: flex;
+                align-items: center;
+            }
+            .ArrowIcon{
+                padding: 0 15px;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                border: none;
+                background: rgba(74,189,172,0.5 ); 
+            }
+        }
+    }
+    .InputContainer{
+        border:1px solid rgba(0,0,0,0.7);
+        height: 250px;
+        width: 75%;
+        margin: 0 auto;
+        .NewMembersContainer{
+            width:100%;
+            display: flex;
+            flex-flow: wrap;
+            overflow-y: scroll;
+            height: 100%;;
+        }
+    }
+    .AddButton{
+        width:100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 50px;
+        border: none;
+        background: $FreshBlue;
+        opacity: 0.75;
+        color: white;
+        font-weight: bold;
+        font-size: 25px;
+    }
+    .AddButton:hover{
+        opacity: 1;
+    }
+}

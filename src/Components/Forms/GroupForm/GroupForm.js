@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Paper, TextField, Button } from '@material-ui/core';
-import classes from './GroupForm.module.css';
+import classes from './GroupForm.module.scss';
+import classNames from 'classnames';
 import fire from '../../../firebase';
+import CustomTextField from '../../UI/CustomTextField/CustomTextField';
+
 class GroupForm extends Component {
     constructor(props){
         super(props);
@@ -34,21 +37,31 @@ class GroupForm extends Component {
             index: this.state.groupIndex
         });
     }
-
-    render(){        
+    
+    render(){  
         return(
         <Paper className={classes.GroupForm}>
-            <form onSubmit={this.handleSubmit}>
-                <div className={classes.FormTitle}><h4>Create a New Group</h4></div>
-                <div className={classes.InputContainer}>
-                    <TextField
+            <div className={classes.PictureFrame}>
+                {/* <img className={classes.Picture} src='https://source.unsplash.com/featured/?friends' alt="Friends"/> */}
+            </div>
+            <form onSubmit={this.handleSubmit} className={classes.Form}>
+                <div className={classes.Inner}>
+                    <h4 className={classes.Title}>Create a New Group</h4>
+                    {/* <TextField
                         id="standard-name"
                         label="Group Name"
                         value={this.state.eventName}
                         onChange={this.handleChange('groupName')}
                         className={classes.input}
+                    /> */}
+                    <CustomTextField
+                        label="Group Name"
+                        value={this.state.eventName}
+                        change={this.handleChange}
+                        changeStateVar={'groupName'}
+                        variant="field"
                     />
-                    <TextField
+                    {/* <TextField
                         id="outlined-multiline-flexible"
                         label="Description"
                         multiline
@@ -58,11 +71,21 @@ class GroupForm extends Component {
                         className={classes.input}
                         margin="normal"
                         variant="outlined"
+                    /> */}
+                    <CustomTextField
+                        label="Group Description"
+                        value={this.state.eventDesc}
+                        change={this.handleChange}
+                        changeStateVar={'groupDesc'}
+                        className={classes.input}
+                        variant="area"
                     />
+                    
+                    <Button type="submit" value="Submit" className={classes.Submit}>
+                        Submit
+                    </Button>
                 </div>
-                <Button type="submit" value="Submit" className={classes.Submit}>
-                    Submit
-                </Button>
+                
             </form>
         </Paper> 
         );

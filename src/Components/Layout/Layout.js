@@ -7,7 +7,7 @@ import Dashboard from '../../Containers/Dashboard/Dashboard';
 import DashPlaceholder from '../UI/DashPlaceholder/DashPlaceholder';
 import Spinner from '../UI/Spinner/Spinner';
 import fire from 'firebase';
-
+import AddMembers from '../Forms/AddMembers/AddMembers';
 class Layout extends Component {
     constructor(props){
         super(props);
@@ -268,6 +268,9 @@ class Layout extends Component {
         }
 
             return(
+                // <div className = {classes.FullApp}>
+                //     <AddMembers/>
+                // </div>
                 <div className = {classes.FullApp}>
                     <TopBar toggle={this.toggleSideBar} isOpen={this.state.sidebar} logout={this.handleLogout}/>
                     <main className={classes.Main}>

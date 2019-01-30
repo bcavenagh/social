@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa');
+
+$FreshBlue: #4ABDAC;
+$CleanWhite: #DFDCE3;
+$VermillionRed: #FC4A1A;
+$SunshineYellow: #F7B733;
+
+.loginContainer{
+   // background: url('https://source.unsplash.com/daily') center center;
+   background-color: $FreshBlue;/* Old browsers */
+   background: -moz-linear-gradient(top, #4abdac 0%, #44a798 100%); /* FF3.6-15 */
+   background: -webkit-linear-gradient(top, #4abdac 0%,#44a798 100%); /* Chrome10-25,Safari5.1-6 */
+   background: linear-gradient(to bottom, #4abdac 0%,#44a798 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4abdac', endColorstr='#44a798',GradientType=0 ); /* IE6-9 */
+   
+   background-size: cover;
+   height:100vh;
+   width:100vw;
+   position:relative;
+   overflow: hidden;
+}
+.FormContainer{
+   background:white;
+   box-shadow: 0 0 15px black;
+   height:100%;
+   width:35%;
+   max-width: 450px;;
+   position: absolute;
+   right:75px;
+   top:0;
+   display:flex;
+   align-items: center;
+}
+.LoginForm{
+   width:100%;
+   text-align: center;
+}

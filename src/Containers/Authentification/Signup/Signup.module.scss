@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa');
+
+$FreshBlue: #4ABDAC;
+$CleanWhite: #DFDCE3;
+$VermillionRed: #FC4A1A;
+$SunshineYellow: #F7B733;
+
+.signupContainer{
+  text-align:center;
+  position: absolute;
+  width:100%;
+  padding:20px 0px 50px;
+  background-color: white;
+  transition: all .4s;
+  height: 100%;
+  display: flex;
+  align-items: center;
+} 
+.signupFormContainer{
+  width: 100%;
+}
+.Open{
+  bottom: 50%;
+  // left: 50%;
+  transform:translateY(50%);
+  // transition: all 1s;
+}
+.Close{
+  bottom:-100%;
+  // left:50%;
+  transform: (0, 0);
+  // transition: all 1s;
+}
+.SignupInputContainer{
+  width:100%;
+  height:50px;
+  margin:2px 0;
+}
+.loginInput{
+  font-family: "Comfortaa";
+  padding-left: 15px;
+  width:100%;
+  height:50px;
+  background-color: $CleanWhite;
+  border:none;
+  font-size: 20px;
+}
+
+.SignupButton{
+    width:100%;
+    height:40px;
+    margin:25px 0 0 0;
+    border:none;
+    text-transform: uppercase;
+    color:white;
+    font-size: 20px;
+    background-color: $VermillionRed;
+    opacity: 0.75;
+}
+.SignupButton:hover{
+    opacity: 1;;
+}
+.BackToLogin{
+  position: absolute;
+  top:15px;
+  left:15px;
+  display: flex;
+  align-items: flex-start;
+  p{
+    margin: 0;
+    font-size: 20px;
+  }
+}
+.BackToLogin:hover{
+  cursor: pointer;
+}
